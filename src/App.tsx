@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TabType } from './types/transit';
 import { Header } from './components/common/Header';
 import { BottomNav } from './components/layout/BottomNav';
@@ -17,6 +17,10 @@ export default function App() {
   const [activeDestination, setActiveDestination] = useState<string>('Westlands (Sarit/The Mall)');
   const [activeOrigin, setActiveOrigin] = useState<string>('Kencom Terminal (CBD)');
   const [activeRouteId, setActiveRouteId] = useState<string | undefined>('route-e105-westlands');
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentTab]);
 
   // Navigate to Activity with pre-filled destination/route/origin
   const handleNavigateToActivity = (
@@ -47,14 +51,27 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#f6f8fa] text-[#111827] flex flex-col selection:bg-[#00e575] selection:text-[#0b1b3d]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:border focus:border-slate-300 focus:bg-white focus:px-4 focus:py-3 focus:font-semibold focus:text-[#0b1b3d] focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+
       {/* Top Header with lowercase m3 branding */}
       <Header
         onOpenProfile={() => setCurrentTab('account')}
         activeSaccoCount={7}
       />
 
+      {/* Keep primary navigation early in keyboard order; it remains fixed visually. */}
+      <BottomNav
+        currentTab={currentTab}
+        onTabChange={(tab) => setCurrentTab(tab)}
+      />
+
       {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-5xl mx-auto">
+      <main id="main-content" tabIndex={-1} className="flex-1 w-full max-w-5xl mx-auto">
         {currentTab === 'home' && (
           <HomeScreen
             selectedSaccoId={selectedSaccoId}
@@ -81,11 +98,6 @@ export default function App() {
         )}
       </main>
 
-      {/* Primary 3-Tab Bottom Navigation */}
-      <BottomNav
-        currentTab={currentTab}
-        onTabChange={(tab) => setCurrentTab(tab)}
-      />
     </div>
   );
 }

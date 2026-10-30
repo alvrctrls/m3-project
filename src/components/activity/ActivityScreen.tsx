@@ -526,7 +526,8 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
   };
 
   return (
-    <div className="pb-24 pt-2 px-3 md:px-6 max-w-4xl mx-auto space-y-4">
+    <div className="pb-24 pt-2 px-3 md:px-6 max-w-5xl mx-auto space-y-4">
+      <h1 className="sr-only">Plan and track Nairobi journeys</h1>
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-[#0b1b3d] text-white px-4 py-2 rounded-full text-xs font-semibold shadow-lg flex items-center gap-2 animate-in fade-in slide-in-from-top-2">
@@ -554,6 +555,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
               <input
                 ref={originInputRef}
                 type="text"
+                aria-label="Starting point"
                 value={originText}
                 onFocus={() => setFocusedInput('origin')}
                 onChange={(e) => {
@@ -574,6 +576,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
             <div className="relative">
               <input
                 type="text"
+                aria-label="Destination"
                 value={destinationText}
                 onFocus={() => setFocusedInput('destination')}
                 onChange={(e) => {
@@ -893,6 +896,8 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
               <span>Commuter Guide</span>
             </button>
             <button
+              type="button"
+              aria-pressed={isElectricOnly}
               onClick={() => setIsElectricOnly(!isElectricOnly)}
               className={`text-xs px-2.5 py-1 rounded-full flex items-center gap-1 font-semibold transition ${
                 isElectricOnly
@@ -916,6 +921,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
               <button
                 key={sacco.id}
                 onClick={() => onSelectSacco(sacco.id)}
+                aria-pressed={isSelected}
                 className={`shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-semibold transition-all ${
                   isSelected
                     ? 'bg-[#0b1b3d] text-white border-[#0b1b3d] shadow-xs'
@@ -957,6 +963,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
       <section className="bg-slate-100 p-1 rounded-2xl flex items-center gap-1 text-xs font-bold">
         <button
           onClick={() => setSubTab('nearby')}
+                aria-pressed={subTab === 'nearby'}
           className={`flex-1 py-2 rounded-xl transition flex items-center justify-center gap-1.5 ${
             subTab === 'nearby'
               ? 'bg-white text-[#0b1b3d] shadow-xs'
@@ -968,6 +975,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
         </button>
         <button
           onClick={() => setSubTab('routes')}
+                aria-pressed={subTab === 'routes'}
           className={`flex-1 py-2 rounded-xl transition flex items-center justify-center gap-1.5 ${
             subTab === 'routes'
               ? 'bg-white text-[#0b1b3d] shadow-xs'
@@ -979,6 +987,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
         </button>
         <button
           onClick={() => setSubTab('history')}
+                aria-pressed={subTab === 'history'}
           className={`flex-1 py-2 rounded-xl transition flex items-center justify-center gap-1.5 ${
             subTab === 'history'
               ? 'bg-white text-[#0b1b3d] shadow-xs'
@@ -1038,8 +1047,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                 return (
                   <div
                     key={bus.id}
-                    onClick={() => setSelectedVehicle(bus)}
-                    className={`bg-white rounded-2xl p-4 border transition-all cursor-pointer ${
+                    className={`bg-white rounded-2xl p-4 border transition-all ${
                       isSelected
                         ? 'border-[#00e575] shadow-md ring-2 ring-emerald-100'
                         : 'border-slate-200 hover:border-slate-300'
@@ -1087,7 +1095,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                       </div>
                     </div>
 
-                    <div className="mt-3 pt-2 border-t border-slate-100 flex items-center justify-between text-xs text-slate-600">
+                    <div className="mt-3 pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-600">
                       <div className="flex items-center gap-3">
                         <span className="flex items-center gap-1">
                           <Users className="w-3.5 h-3.5 text-slate-400" />
@@ -1104,23 +1112,34 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                         )}
                       </div>
 
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedVehicle(bus);
-                          const matchedRoute =
-                            MOCK_ROUTES.find((r) => r.id === bus.routeId) ||
-                            MOCK_ROUTES.find(
-                              (r) => r.routeCode === bus.routeNumber
-                            ) ||
-                            MOCK_ROUTES[0];
-                          setSelectedRouteId(matchedRoute.id);
-                          setIsTicketModalOpen(true);
-                        }}
-                        className="px-3 py-1.5 rounded-full bg-[#0b1b3d] text-white text-xs font-bold hover:bg-slate-800 transition"
-                      >
-                        Board Bus (Demo)
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          aria-pressed={isSelected}
+                          aria-label={`Show ${bus.plate} on map`}
+                          onClick={() => setSelectedVehicle(bus)}
+                          className="min-h-11 px-3 rounded-xl border border-slate-200 bg-white text-[#0b1b3d] text-xs font-bold hover:bg-slate-50 transition"
+                        >
+                          Track
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedVehicle(bus);
+                            const matchedRoute =
+                              MOCK_ROUTES.find((r) => r.id === bus.routeId) ||
+                              MOCK_ROUTES.find(
+                                (r) => r.routeCode === bus.routeNumber
+                              ) ||
+                              MOCK_ROUTES[0];
+                            setSelectedRouteId(matchedRoute.id);
+                            setIsTicketModalOpen(true);
+                          }}
+                          className="min-h-11 px-3 rounded-xl bg-[#0b1b3d] text-white text-xs font-bold hover:bg-slate-800 transition"
+                        >
+                          Board Bus (Demo)
+                        </button>
+                      </div>
                     </div>
                   </div>
                 );
@@ -1208,14 +1227,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                 return (
                   <div
                     key={route.id}
-                    onClick={() => {
-                      setSelectedRouteId(route.id);
-                      setOriginText(route.fromStop.name);
-                      setDestinationText(route.toStop.name);
-                      setLockedOriginStopId(route.fromStop.id);
-                      setLockedDestStopId(route.toStop.id);
-                    }}
-                    className={`bg-white rounded-3xl p-4 md:p-5 border transition-all cursor-pointer ${
+                    className={`bg-white rounded-3xl p-4 md:p-5 border transition-all ${
                       isSelected
                         ? 'border-[#0b1b3d] shadow-md ring-2 ring-slate-200'
                         : 'border-slate-200 hover:border-slate-300'
@@ -1291,6 +1303,21 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                         </span>
                       )}
                     </div>
+
+                    <button
+                      type="button"
+                      aria-pressed={isSelected}
+                      onClick={() => {
+                        setSelectedRouteId(route.id);
+                        setOriginText(route.fromStop.name);
+                        setDestinationText(route.toStop.name);
+                        setLockedOriginStopId(route.fromStop.id);
+                        setLockedDestStopId(route.toStop.id);
+                      }}
+                      className="mt-3 min-h-11 w-full rounded-xl bg-[#0b1b3d] px-4 text-left text-sm font-bold text-white transition hover:bg-slate-800"
+                    >
+                      {isSelected ? 'Selected route' : `Select ${route.routeCode}`}
+                    </button>
                   </div>
                 );
               })}

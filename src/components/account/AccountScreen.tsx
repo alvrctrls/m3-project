@@ -156,7 +156,8 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
   };
 
   return (
-    <div className="pb-24 pt-5 px-4 max-w-3xl mx-auto space-y-5">
+    <div className="pb-24 pt-5 px-4 max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
+      <h1 className="sr-only">Your account</h1>
       {/* Toast Alert */}
       {toastMessage && (
         <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-[#0b1b3d] text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg border border-slate-700 animate-in fade-in duration-200">
@@ -249,7 +250,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
       </section>
 
       {/* 3. Preferred SACCOs & Transit Preferences */}
-      <section className="bg-white rounded-3xl p-5 border border-[#e5e7eb] shadow-xs space-y-4">
+      <section className="lg:col-span-2 bg-white rounded-3xl p-5 border border-[#e5e7eb] shadow-xs space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Heart className="w-4 h-4 text-rose-500 fill-rose-500" />
@@ -276,6 +277,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
           <button
             type="button"
             role="switch"
+            aria-label="Prioritize preferred SACCOs"
             aria-checked={transportPrefs.prioritizePreferred}
             onClick={handleTogglePrioritize}
             className={`w-11 h-6 shrink-0 rounded-full transition-colors relative focus:outline-none p-0.5 ${

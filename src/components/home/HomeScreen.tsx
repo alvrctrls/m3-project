@@ -199,7 +199,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   };
 
   return (
-    <div className="pb-24 pt-5 px-4 max-w-3xl mx-auto space-y-6">
+    <div className="pb-24 pt-5 px-4 max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-[#0b1b3d] text-white px-4 py-2 rounded-full text-xs font-semibold shadow-lg flex items-center gap-2 animate-in fade-in slide-in-from-top-2">
@@ -209,11 +209,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       )}
 
       {/* 1. Prominent "Where to?" Search Field */}
-      <section className="bg-white rounded-3xl p-5 shadow-sm border border-[#e5e7eb] space-y-4">
+      <section className="lg:col-span-2 bg-white rounded-3xl p-5 shadow-sm border border-[#e5e7eb] space-y-4">
         <div className="flex items-center justify-between">
-          <span className="text-xl font-bold font-heading text-[#0b1b3d]">
+          <h1 className="text-xl font-bold font-heading text-[#0b1b3d]">
             Habari, commuter
-          </span>
+          </h1>
           <span className="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
             Simulated live network
           </span>
@@ -224,6 +224,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             <Search className="w-5 h-5 text-[#6b7280] shrink-0 mr-3" />
             <input
               type="text"
+              aria-label="Search a Nairobi destination"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Where to? (e.g. Westlands, Kencom, Karen)"
@@ -261,12 +262,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </section>
 
       {/* 2. SACCO Selection */}
-      <section className="space-y-2.5">
+      <section className="lg:col-span-2 space-y-2.5">
         <div className="flex items-center justify-between">
           <h2 className="text-xs font-bold uppercase tracking-wider text-[#6b7280]">
             Partner SACCOs & Fleet
           </h2>
           <button
+            type="button"
+            aria-pressed={electricFilter}
             onClick={() => setElectricFilter(!electricFilter)}
             className={`text-xs px-2.5 py-1 rounded-full flex items-center gap-1 font-semibold transition ${
               electricFilter
@@ -287,6 +290,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               <button
                 key={sacco.id}
                 onClick={() => onSelectSacco(sacco.id)}
+                aria-pressed={isSelected}
                 className={`shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full border transition-all text-xs font-semibold ${
                   isSelected
                     ? 'bg-[#0b1b3d] text-white border-[#0b1b3d] shadow-sm'
@@ -615,7 +619,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       </section>
 
       {/* Demo notice */}
-      <div className="text-center text-[11px] text-slate-400 py-2">
+      <div className="lg:col-span-2 text-center text-xs text-slate-500 py-2">
         m3 Nairobi Demo • Timings and vehicle beacons are simulated for prototype review.
       </div>
 

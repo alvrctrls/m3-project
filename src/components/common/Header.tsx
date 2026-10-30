@@ -14,7 +14,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ onOpenProfile, activeSaccoCount = 7 }) => {
   return (
     <header className="sticky top-0 z-30 bg-[#f9f9ff]/90 backdrop-blur-md border-b border-[#e5e7eb]/80 px-4 py-3">
-      <div className="max-w-4xl mx-auto flex items-center justify-between">
+      <div className="max-w-5xl mx-auto flex items-center justify-between">
         {/* Brand Logo: Lowercase m3 branding */}
         <div className="flex items-center gap-2">
           <div className="flex items-baseline">
@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenProfile, activeSaccoCount 
             type="button"
             onClick={onOpenProfile}
             aria-label="Open account"
-            className="w-9 h-9 rounded-full bg-[#0b1b3d] text-white flex items-center justify-center font-bold text-xs shadow-xs hover:bg-slate-800 transition cursor-pointer"
+            className="w-11 h-11 rounded-full bg-[#0b1b3d] text-white flex items-center justify-center font-bold text-xs shadow-xs hover:bg-slate-800 transition cursor-pointer"
             title="Aj Muchiri (Account)"
           >
             AM

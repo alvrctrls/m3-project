@@ -224,7 +224,11 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
         const marker = currentMarkers.get(vehicle.id)!;
         marker.setIcon(customIcon);
       } else {
-        const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
+        const marker = L.marker([lat, lng], {
+          icon: customIcon,
+          alt: `${vehicle.routeNumber}, ${vehicle.saccoName} bus`,
+          title: `${vehicle.routeNumber}, ${vehicle.saccoName} bus`,
+        }).addTo(map);
         marker.on('click', () => {
           setInspectedVehicle(vehicle);
           if (onSelectVehicle) onSelectVehicle(vehicle);
@@ -297,7 +301,11 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
         iconSize: [0, 0],
       });
 
-      const marker = L.marker([stop.lat, stop.lng], { icon: stopIcon }).addTo(map);
+      const marker = L.marker([stop.lat, stop.lng], {
+        icon: stopIcon,
+        alt: `Transit stop: ${stop.name}`,
+        title: stop.name,
+      }).addTo(map);
       marker.bindPopup(
         `<div class="text-xs">
           <div class="font-bold text-slate-900">${stop.name}</div>
@@ -410,6 +418,8 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
           const interMarker = L.marker([interStop.lat, interStop.lng], {
             icon: interIcon,
             zIndexOffset: isTransferStop ? 300 : 200,
+            alt: `${isTransferStop ? 'Transfer stop' : 'Intermediate stop'}: ${interStop.name}`,
+            title: interStop.name,
           }).addTo(map);
 
           interMarker.bindPopup(
@@ -452,6 +462,8 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
       originMarkerRef.current = L.marker(originCoords, { 
         icon: originIcon,
         zIndexOffset: 500,
+        alt: `Journey start: ${originName}`,
+        title: `Journey start: ${originName}`,
       }).addTo(map);
       boundsPoints.push(originCoords);
     }
@@ -478,6 +490,8 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
       destinationMarkerRef.current = L.marker(destCoords, { 
         icon: destIcon,
         zIndexOffset: 500,
+        alt: `Journey destination: ${destName}`,
+        title: `Journey destination: ${destName}`,
       }).addTo(map);
       boundsPoints.push(destCoords);
     }
