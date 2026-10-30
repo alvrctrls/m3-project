@@ -129,7 +129,6 @@ export interface PastTrip {
   date: string;
   time: string;
   fareKes: number | null;
-  mpesaRef?: string;
   isElectric: boolean;
   durationMinutes: number | null;
   status: TripStatus;
@@ -180,7 +179,6 @@ export interface UserProfile {
   tier: string;
   co2SavedKg: number;
   totalTrips: number;
-  m3BalanceKes: number;
   preferredSaccoIds: string[];
   language: 'en' | 'sw' | 'sheng';
   notificationsEnabled: boolean;

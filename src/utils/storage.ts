@@ -527,7 +527,6 @@ export interface CreateTripInput {
   durationMinutes?: number | null;
   isElectric: boolean;
   status: TripStatus;
-  mpesaRef?: string;
 }
 
 /**
@@ -628,8 +627,6 @@ export function recordTrip(input: CreateTripInput): PastTrip[] {
     time: formattedTime,
     fareKes:
       typeof input.fareKes === 'number' && !isNaN(input.fareKes) ? input.fareKes : null,
-    mpesaRef:
-      input.mpesaRef || `DEMO-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
     isElectric: Boolean(input.isElectric),
     durationMinutes:
       typeof input.durationMinutes === 'number' && !isNaN(input.durationMinutes)

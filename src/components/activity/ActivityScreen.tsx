@@ -42,7 +42,6 @@ import {
   deleteTripRecord,
   STORAGE_EVENT,
 } from '../../utils/storage';
-import { TicketModal } from '../modals/TicketModal';
 import { CommuterGuideModal } from '../modals/CommuterGuideModal';
 import {
   ArrowUpDown,
@@ -201,8 +200,6 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
     }
   }, [originText, destinationText, selectedRouteId]);
 
-  // Ticket modal state
-  const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
   const [showShareNotification, setShowShareNotification] = useState(false);
 
   // Resolve matching stops strictly without hardcoded fallback (supporting TransitStop queries and SavedPlace titles)
@@ -1133,11 +1130,11 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                               ) ||
                               MOCK_ROUTES[0];
                             setSelectedRouteId(matchedRoute.id);
-                            setIsTicketModalOpen(true);
+                            setSubTab('routes');
                           }}
                           className="min-h-11 px-3 rounded-xl bg-[#0b1b3d] text-white text-xs font-bold hover:bg-slate-800 transition"
                         >
-                          Board Bus (Demo)
+                          View Route
                         </button>
                       </div>
                     </div>
@@ -1701,8 +1698,8 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                 </div>
               </div>
 
-              {/* Action Buttons: Save Planned Trip / Start Demo Journey / Boarding Pass */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              {/* Action Buttons: Save Planned Trip / Start Demo Journey */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <button
                   type="button"
                   onClick={() => handleCreatePrototypeTrip('Planned')}
@@ -1715,21 +1712,10 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                 <button
                   type="button"
                   onClick={() => handleCreatePrototypeTrip('In progress')}
-                  className="py-3 px-4 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-950 font-bold text-xs hover:bg-emerald-100 transition flex items-center justify-center gap-1.5"
-                >
-                  <Play className="w-3.5 h-3.5 text-emerald-700" />
-                  <span>Start Demo Journey</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setIsTicketModalOpen(true)}
                   className="py-3 px-4 rounded-full bg-[#0b1b3d] text-white font-bold text-xs hover:bg-slate-800 active:scale-[0.99] transition shadow-md flex items-center justify-center gap-1.5"
                 >
-                  <span>
-                    Demo Pass ({formatRouteFare(activeRoute.demoFareKes)})
-                  </span>
-                  <ArrowRight className="w-3.5 h-3.5 text-[#00e575]" />
+                  <Play className="w-3.5 h-3.5 text-[#00e575]" />
+                  <span>Start Demo Journey</span>
                 </button>
               </div>
             </div>
@@ -1831,7 +1817,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                         {formatRouteFare(trip.fareKes)}
                       </span>
                       <span className="block text-[10px] text-slate-400 font-mono">
-                        {trip.mpesaRef || 'DEMO-PASS'}
+                        Est. Fare
                       </span>
                     </div>
                   </div>
@@ -1926,19 +1912,6 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
             </div>
           )}
         </section>
-      )}
-
-      {/* Ticket Modal */}
-      {isTicketModalOpen && activeRoute && (
-        <TicketModal
-          route={activeRoute}
-          vehicle={selectedVehicle}
-          onClose={() => setIsTicketModalOpen(false)}
-          onTripStarted={() => {
-            handleCreatePrototypeTrip('In progress');
-            setIsTicketModalOpen(false);
-          }}
-        />
       )}
 
       {/* Contextual Nairobi Commuter Guide Modal */}

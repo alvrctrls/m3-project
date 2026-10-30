@@ -327,7 +327,7 @@ async function runStorageRegressionSuite() {
 
   // Separation from completed trip history
   assert(
-    MOCK_PAST_TRIPS.length > 0 && typeof MOCK_PAST_TRIPS[0].mpesaRef === 'string',
+    MOCK_PAST_TRIPS.length > 0 && typeof MOCK_PAST_TRIPS[0].routeCode === 'string',
     '3.9 Recent searches remain completely separate from completed trip history (MOCK_PAST_TRIPS)'
   );
 

@@ -99,17 +99,16 @@ export const COMMUTER_GUIDE_SECTIONS: CommuterGuideSection[] = [
   {
     id: 'guide-payments-fares',
     number: 5,
-    title: 'Payment methods and fare information',
+    title: 'Fare expectations and route pricing',
     summary:
-      'How M-Pesa mobile money, cash, and off-peak vs. peak-hour fares work in practice.',
+      'How off-peak vs. peak-hour fares work on Nairobi routes and how to verify fare estimates at the stage.',
     generalGuidance: [
       'Fares in Nairobi are not unified under a single city-wide tariff; each SACCO sets fares based on distance, time of day (peak vs. off-peak), and weather or traffic conditions.',
-      'Mobile Money (M-Pesa): Widely accepted via Lipa na M-Pesa (Till Number or Paybill) or Pochi la Biashara displayed inside the bus. Always verify the recipient name with the conductor before sending payment.',
-      'Cash: Carrying small-denomination Kenyan Shilling notes (KES 50, 100, 200) is recommended in case mobile network coverage is slow or a conductor prefers cash.',
-      'Ask for the current fare at the stage before boarding so there are no surprises mid-journey.',
+      'Route fare figures displayed in m3 are simulated prototype estimates for journey planning only—m3 does not process electronic payments, wallets, or ticket purchases.',
+      'Ask the uniformed stage marshal or conductor for the current route fare at the stage before boarding so there are no surprises mid-journey.',
     ],
     verifyLocallyNote:
-      'All fares, QR passes, and M-Pesa references inside m3 are simulated prototype estimates. In real travel, confirm the accepted payment method (M-Pesa Till/Paybill vs. Cash) and exact fare directly with the conductor before boarding.',
+      'All fares shown inside m3 are simulated prototype estimates for route planning only. Always confirm the exact current fare directly with the conductor or stage marshal before boarding.',
   },
   {
     id: 'guide-etiquette-safety',
@@ -155,6 +154,6 @@ export const COMMUTER_GUIDE_SECTIONS: CommuterGuideSection[] = [
       '4. Prototype Trip History: Save a route as "Planned", start a simulated journey ("In progress"), or repeat a past trip from Activity -> Past Trips without losing your coordinate accuracy.',
     ],
     verifyLocallyNote:
-      'm3 is an interactive transit prototype. Live bus markers, ETAs, fares, and boarding passes are simulated for demonstration and must not be treated as verified real-time telemetry.',
+      'm3 is an interactive transit discovery and route-planning prototype. Live bus markers, ETAs, and fare estimates are simulated for demonstration and must not be treated as verified real-time telemetry.',
   },
 ];

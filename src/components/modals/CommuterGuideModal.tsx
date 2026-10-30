@@ -91,7 +91,7 @@ export const CommuterGuideModal: React.FC<CommuterGuideModalProps> = ({
               Nairobi Commuter Guide
             </h2>
             <p className="text-xs text-slate-300">
-              Practical tips for navigating SACCO stages, routes, M-Pesa fares, and transfers.
+              Practical tips for navigating SACCO stages, routes, fare estimates, and transfers.
             </p>
           </div>
 
@@ -112,7 +112,7 @@ export const CommuterGuideModal: React.FC<CommuterGuideModalProps> = ({
               type="text"
               value={filterQuery}
               onChange={(e) => setFilterQuery(e.target.value)}
-              placeholder="Search topics (e.g. stage, M-Pesa, shukisha, transfer)..."
+              placeholder="Search topics (e.g. stage, SACCO, shukisha, transfer)..."
               className="w-full bg-[#f6f8fa] text-xs font-medium text-slate-800 rounded-xl pl-8 pr-3 py-2 outline-none focus:ring-1 focus:ring-[#0b1b3d] border border-slate-200/80"
             />
           </div>
@@ -141,7 +141,7 @@ export const CommuterGuideModal: React.FC<CommuterGuideModalProps> = ({
           <div className="bg-amber-50 border border-amber-200/80 rounded-2xl p-3 text-xs text-amber-950 flex items-start gap-2.5">
             <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
             <div className="leading-relaxed">
-              <strong>Advisory Note:</strong> This guide provides general orientation for Nairobi public transport. Because fares, stage bays, and payment methods vary by operator and time of day, always verify current details locally with uniformed SACCO marshals or conductors.
+              <strong>Advisory Note:</strong> This guide provides general orientation for Nairobi public transport. Because fares and stage bays vary by operator and time of day, always verify current details locally with uniformed SACCO marshals or conductors.
             </div>
           </div>
 

@@ -28,7 +28,6 @@ import {
   Globe, 
   Shield, 
   HelpCircle, 
-  Wallet, 
   Plus, 
   Trash2, 
   Check, 
@@ -60,8 +59,6 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
   const [transportPrefs, setTransportPrefs] = useState<TransportPreferences>(() => getTransportPreferences());
   const [placeToEdit, setPlaceToEdit] = useState<SavedPlace | null>(null);
   const [isPlaceModalOpen, setIsPlaceModalOpen] = useState(false);
-  const [showWalletModal, setShowWalletModal] = useState(false);
-  const [topUpAmount, setTopUpAmount] = useState('500');
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [expandedGuideId, setExpandedGuideId] = useState<string | null>(null);
   const [isGuideModalOpen, setIsGuideModalOpen] = useState(false);
@@ -145,16 +142,6 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
     showToast('Destination removed');
   };
 
-  const handleTopUp = () => {
-    const amount = parseInt(topUpAmount) || 500;
-    setProfile((prev) => ({
-      ...prev,
-      m3BalanceKes: prev.m3BalanceKes + amount,
-    }));
-    setShowWalletModal(false);
-    showToast(`KES ${amount} added to m3 Transit Pass via M-Pesa (Demo)`);
-  };
-
   return (
     <div className="pb-24 pt-5 px-4 max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5 items-start">
       <h1 className="sr-only">Your account</h1>
@@ -166,7 +153,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
       )}
 
       {/* 1. Profile Header & Green Impact Card */}
-      <section className="bg-white rounded-3xl p-5 border border-[#e5e7eb] shadow-xs space-y-4">
+      <section className="lg:col-span-2 bg-white rounded-3xl p-5 border border-[#e5e7eb] shadow-xs space-y-4">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-full bg-[#0b1b3d] text-white flex items-center justify-center font-extrabold text-xl shadow-md border-2 border-slate-100">
             AM
@@ -216,40 +203,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
         </div>
       </section>
 
-      {/* 2. m3 Digital Transit Card / Balance */}
-      <section className="bg-gradient-to-r from-[#0b1b3d] to-[#1e293b] text-white rounded-3xl p-5 shadow-sm space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Wallet className="w-4 h-4 text-[#00e575]" />
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
-              m3 Transit Balance
-            </span>
-          </div>
-          <span className="text-[11px] bg-white/10 px-2 py-0.5 rounded-full font-mono">
-            NFC Active
-          </span>
-        </div>
-
-        <div className="flex items-baseline justify-between">
-          <div>
-            <div className="text-2xl font-extrabold tracking-tight font-heading">
-              KES {profile.m3BalanceKes.toLocaleString()}
-            </div>
-            <div className="text-xs text-slate-400">
-              Auto-topup linked to M-PESA ({profile.phone})
-            </div>
-          </div>
-
-          <button
-            onClick={() => setShowWalletModal(true)}
-            className="px-4 py-2 rounded-full bg-[#00e575] text-[#0b1b3d] text-xs font-bold hover:bg-[#05f782] transition shadow-xs"
-          >
-            + Top Up
-          </button>
-        </div>
-      </section>
-
-      {/* 3. Preferred SACCOs & Transit Preferences */}
+      {/* 2. Preferred SACCOs & Transit Preferences */}
       <section className="lg:col-span-2 bg-white rounded-3xl p-5 border border-[#e5e7eb] shadow-xs space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -646,59 +600,6 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
           </div>
         </div>
       </section>
-
-      {/* Top Up Demo Modal */}
-      {showWalletModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in">
-          <div className="bg-white rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
-            <h3 className="text-base font-bold text-[#0b1b3d] font-heading">
-              Top Up m3 Transit Pass
-            </h3>
-            <p className="text-xs text-slate-600">
-              Demo funds will be credited to your card balance via simulated M-Pesa push prompt.
-            </p>
-
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-700 block">
-                Select Amount (KES)
-              </label>
-              <div className="grid grid-cols-3 gap-2">
-                {['200', '500', '1000'].map((amt) => (
-                  <button
-                    key={amt}
-                    type="button"
-                    onClick={() => setTopUpAmount(amt)}
-                    className={`py-2 rounded-xl text-xs font-bold border transition ${
-                      topUpAmount === amt
-                        ? 'border-[#0b1b3d] bg-[#0b1b3d] text-white'
-                        : 'border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100'
-                    }`}
-                  >
-                    KES {amt}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setShowWalletModal(false)}
-                className="flex-1 py-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 transition"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={handleTopUp}
-                className="flex-1 py-2.5 rounded-full bg-[#00e575] text-[#0b1b3d] text-xs font-bold hover:bg-[#05f782] transition shadow-xs"
-              >
-                Confirm (Demo)
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Add / Edit Saved Place Modal */}
       <SavedPlaceModal
