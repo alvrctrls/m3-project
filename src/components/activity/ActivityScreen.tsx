@@ -22,6 +22,7 @@ import {
   MOCK_VEHICLES,
   MOCK_ROUTES,
   matchStopByQuery,
+  searchStopsByQuery,
 } from '../../data/mockData';
 import { routingService } from '../../utils/routingService';
 import {
@@ -204,36 +205,63 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
   const [isTicketModalOpen, setIsTicketModalOpen] = useState(false);
   const [showShareNotification, setShowShareNotification] = useState(false);
 
-  // Resolve matching stops strictly without hardcoded fallback
-  const originStop = useMemo(() => {
-    if (lockedOriginStopId) {
-      const byId = TRANSIT_STOPS.find((s) => s.id === lockedOriginStopId);
+  // Resolve matching stops strictly without hardcoded fallback (supporting TransitStop queries and SavedPlace titles)
+  const resolveStopFromTextOrSaved = (
+    text: string,
+    lockedId: string | null
+  ): TransitStop | null => {
+    if (lockedId) {
+      const byId = TRANSIT_STOPS.find((s) => s.id === lockedId);
       if (byId) return byId;
     }
-    return matchStopByQuery(originText) || null;
-  }, [originText, lockedOriginStopId]);
+    if (!text || !text.trim()) return null;
 
-  const destinationStop = useMemo(() => {
-    if (lockedDestStopId) {
-      const byId = TRANSIT_STOPS.find((s) => s.id === lockedDestStopId);
-      if (byId) return byId;
+    const directStop = matchStopByQuery(text);
+    if (directStop) return directStop;
+
+    const q = text.trim().toLowerCase();
+    const matchedSaved = savedPlaces.find((p) => p.title.toLowerCase() === q);
+    if (matchedSaved) {
+      if (matchedSaved.stopId) {
+        const bySavedStopId = TRANSIT_STOPS.find((s) => s.id === matchedSaved.stopId);
+        if (bySavedStopId) return bySavedStopId;
+      }
+      if (matchedSaved.address) {
+        const byAddr = matchStopByQuery(matchedSaved.address);
+        if (byAddr) return byAddr;
+      }
+      // Match closest verified transit stop to saved place coordinates
+      let closestStop: TransitStop | null = null;
+      let minDistSq = Infinity;
+      for (const st of TRANSIT_STOPS) {
+        const dSq =
+          Math.pow(st.lat - matchedSaved.lat, 2) +
+          Math.pow(st.lng - matchedSaved.lng, 2);
+        if (dSq < minDistSq) {
+          minDistSq = dSq;
+          closestStop = st;
+        }
+      }
+      return closestStop;
     }
-    return matchStopByQuery(destinationText) || null;
-  }, [destinationText, lockedDestStopId]);
 
-  // Filter transit suggestions based on the focused input text
+    return null;
+  };
+
+  const originStop = useMemo(
+    () => resolveStopFromTextOrSaved(originText, lockedOriginStopId),
+    [originText, lockedOriginStopId, savedPlaces]
+  );
+
+  const destinationStop = useMemo(
+    () => resolveStopFromTextOrSaved(destinationText, lockedDestStopId),
+    [destinationText, lockedDestStopId, savedPlaces]
+  );
+
+  // Filter transit suggestions based on the focused input text (including fuzzy/typo support)
   const currentSuggestions = useMemo(() => {
     const text = focusedInput === 'origin' ? originText : destinationText;
-    if (!text || !text.trim()) {
-      return TRANSIT_STOPS;
-    }
-    const q = text.toLowerCase().trim();
-    return TRANSIT_STOPS.filter(
-      (s) =>
-        s.name.toLowerCase().includes(q) ||
-        s.area.toLowerCase().includes(q) ||
-        s.lines.some((l) => l.toLowerCase().includes(q))
-    );
+    return searchStopsByQuery(text);
   }, [focusedInput, originText, destinationText]);
 
   // Filter saved places matching search input
@@ -250,35 +278,21 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
     );
   }, [focusedInput, originText, destinationText, savedPlaces]);
 
-  // Dynamically resolve suggested routes connecting originStop to destinationStop
+  // Dynamically resolve suggested routes strictly connecting originStop to destinationStop
   const filteredRoutes = useMemo(() => {
     if (!originStop || !destinationStop || originStop.id === destinationStop.id) {
       return [];
     }
 
-    // Primary route connecting user's origin to destination via routingService
-    const primaryRoute = routingService.getRouteSync(
+    const journeyRoutes = routingService.getRoutesForJourneySync(
       originStop,
       destinationStop,
       selectedSaccoId,
       isElectricOnly
     );
 
-    if (!primaryRoute) {
-      return [];
-    }
-
-    // Alternative routes matching SACCO or electric filter
-    const alternativeRoutes = MOCK_ROUTES.filter((r) => {
-      if (r.id === primaryRoute.id) return false;
-      if (selectedSaccoId !== 'all' && r.saccoId !== selectedSaccoId) return false;
-      if (isElectricOnly && !r.isElectric) return false;
-      return true;
-    }).slice(0, 3);
-
-    const combined = [primaryRoute, ...alternativeRoutes];
     return sortRouteOptions(
-      combined,
+      journeyRoutes,
       routeSortMode,
       transportPrefs.preferredSaccoIds,
       transportPrefs.prioritizePreferred && selectedSaccoId === 'all'
@@ -918,7 +932,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
         <NairobiMap
           vehicles={MOCK_VEHICLES}
           stops={TRANSIT_STOPS}
-          selectedRoute={subTab === 'routes' ? activeRoute : null}
+          selectedRoute={activeRoute}
           selectedVehicle={selectedVehicle}
           originStop={originStop}
           destinationStop={destinationStop}

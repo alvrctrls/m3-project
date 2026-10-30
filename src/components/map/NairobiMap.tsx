@@ -63,6 +63,7 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
   const vehicleMarkersRef = useRef<Map<string, L.Marker>>(new Map());
   const stopMarkersRef = useRef<Map<string, L.Marker>>(new Map());
   const routePolylineRef = useRef<L.Polyline | null>(null);
+  const routeCasingRef = useRef<L.Polyline | null>(null);
   const originMarkerRef = useRef<L.Marker | null>(null);
   const destinationMarkerRef = useRef<L.Marker | null>(null);
   const intermediateMarkersRef = useRef<L.Marker[]>([]);
@@ -332,6 +333,10 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
     if (!map) return;
 
     // Clean up previous route layers
+    if (routeCasingRef.current) {
+      routeCasingRef.current.remove();
+      routeCasingRef.current = null;
+    }
     if (routePolylineRef.current) {
       routePolylineRef.current.remove();
       routePolylineRef.current = null;
@@ -358,10 +363,21 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
 
     // Draw main route polyline strictly when road-following geometry is valid (>= 3 waypoints)
     if (selectedRoute && hasValidRoadGeometry) {
+      // Dark navy outer casing for high contrast on street tiles
+      const casing = L.polyline(selectedRoute.waypoints, {
+        color: '#0b1b3d',
+        weight: 9,
+        opacity: 0.35,
+        lineCap: 'round',
+        lineJoin: 'round',
+      }).addTo(map);
+      routeCasingRef.current = casing;
+
+      // Signature electric-mint green route line (#00e575) for every valid journey
       const polyline = L.polyline(selectedRoute.waypoints, {
-        color: selectedRoute.isElectric ? '#00e575' : '#0b1b3d',
+        color: '#00e575',
         weight: 6,
-        opacity: 0.95,
+        opacity: 0.98,
         lineCap: 'round',
         lineJoin: 'round',
       }).addTo(map);
@@ -369,18 +385,33 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
       routePolylineRef.current = polyline;
       boundsPoints.push(...selectedRoute.waypoints);
 
-      // Render intermediate stop dots along the route polyline if present
+      // Render intermediate stop markers with visible stage labels along the green route line
       if (selectedRoute.stops && selectedRoute.stops.length > 2) {
         const intermediateStops = selectedRoute.stops.slice(1, -1);
-        intermediateStops.forEach((interStop) => {
+        intermediateStops.forEach((interStop, idx) => {
+          const isTransferStop =
+            selectedRoute.transferInfo &&
+            selectedRoute.transferInfo.transferStop.id === interStop.id;
+          const shortName = interStop.name
+            .replace(/\s*(Stage|Terminal|Interchange|Roundabout|Shopping Centre|Mall).*$/i, '')
+            .trim();
+
           const interIcon = L.divIcon({
             html: `
-              <div class="cursor-pointer group flex items-center justify-center" style="transform: translate(-50%, -50%);">
-                <div class="w-3 h-3 rounded-full bg-white border-2 border-[#0b1b3d] shadow-sm flex items-center justify-center ring-2 ring-slate-100 group-hover:scale-125">
-                  <div class="w-1 h-1 rounded-full bg-[#00e575]"></div>
+              <div class="cursor-pointer group flex flex-col items-center" style="transform: translate(-50%, -50%);">
+                <div class="w-4 h-4 rounded-full ${
+                  isTransferStop
+                    ? 'bg-amber-500 border-2 border-white ring-2 ring-amber-300'
+                    : 'bg-[#0b1b3d] border-2 border-[#00e575] ring-2 ring-white'
+                } shadow-md flex items-center justify-center text-[8px] font-extrabold text-white transition-transform group-hover:scale-125">
+                  ${isTransferStop ? 'T' : idx + 1}
                 </div>
-                <div class="absolute -bottom-4 whitespace-nowrap bg-[#0b1b3d]/90 text-[9px] font-bold text-white px-1 py-0.2 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                  ${interStop.name.split(' ')[0]}
+                <div class="mt-0.5 whitespace-nowrap ${
+                  isTransferStop
+                    ? 'bg-amber-500 text-white border border-amber-700'
+                    : 'bg-white/95 text-[#0b1b3d] border border-[#0b1b3d]/30'
+                } text-[9px] font-extrabold px-1.5 py-0.2 rounded-full shadow-sm pointer-events-none">
+                  ${shortName}
                 </div>
               </div>
             `,
@@ -389,18 +420,23 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
           });
           const interMarker = L.marker([interStop.lat, interStop.lng], {
             icon: interIcon,
-            zIndexOffset: 100,
+            zIndexOffset: isTransferStop ? 300 : 200,
           }).addTo(map);
 
           interMarker.bindPopup(
             `<div class="text-xs">
-              <span class="text-[10px] text-slate-400 font-bold uppercase block">Intermediate Stage</span>
+              <span class="text-[10px] ${
+                isTransferStop ? 'text-amber-600' : 'text-emerald-700'
+              } font-bold uppercase block">${
+              isTransferStop ? 'Transfer Hub Stage' : `Stop #${idx + 1} Along Route`
+            }</span>
               <strong class="text-slate-900">${interStop.name}</strong>
               <div class="text-slate-500 text-[11px]">${interStop.area}</div>
             </div>`
           );
 
           intermediateMarkersRef.current.push(interMarker);
+          boundsPoints.push([interStop.lat, interStop.lng]);
         });
       }
     }

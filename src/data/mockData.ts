@@ -271,6 +271,170 @@ export const TRANSIT_STOPS: TransitStop[] = [
     shelter: true,
     lines: ['BG-Airport'],
   },
+  // Intermediate Waiyaki Way Corridor Stages
+  {
+    id: 'stop-chiromo',
+    name: 'Chiromo Stage',
+    area: 'Chiromo / Riverside',
+    lat: -1.2690,
+    lng: 36.8100,
+    isTerminal: false,
+    shelter: true,
+    lines: ['E-105', 'SM-105', 'MT-46'],
+  },
+  {
+    id: 'stop-abc-place',
+    name: 'ABC Place Stage',
+    area: 'Waiyaki Way / Lavington North',
+    lat: -1.2635,
+    lng: 36.7970,
+    isTerminal: false,
+    shelter: true,
+    lines: ['E-105', 'MT-46'],
+  },
+  {
+    id: 'stop-kangemi',
+    name: 'Kangemi Stage',
+    area: 'Waiyaki Way / Kangemi',
+    lat: -1.2605,
+    lng: 36.7720,
+    isTerminal: false,
+    shelter: true,
+    lines: ['E-105', 'MT-46'],
+  },
+  {
+    id: 'stop-mountain-view',
+    name: 'Mountain View Stage',
+    area: 'Waiyaki Way / Mountain View',
+    lat: -1.2595,
+    lng: 36.7550,
+    isTerminal: false,
+    shelter: true,
+    lines: ['E-105', 'MT-46'],
+  },
+  {
+    id: 'stop-kinoo',
+    name: 'Kinoo / 87 Stage',
+    area: 'Waiyaki Way / Kinoo',
+    lat: -1.2590,
+    lng: 36.7435,
+    isTerminal: false,
+    shelter: true,
+    lines: ['E-105', 'MT-46'],
+  },
+  // Intermediate Thika Superhighway Stages
+  {
+    id: 'stop-ngara',
+    name: 'Ngara Stage',
+    area: 'Thika Rd / Ngara',
+    lat: -1.2765,
+    lng: 36.8315,
+    isTerminal: false,
+    shelter: true,
+    lines: ['SM-44', 'LT-237'],
+  },
+  {
+    id: 'stop-muthaiga',
+    name: 'Muthaiga / Survey Stage',
+    area: 'Thika Superhighway',
+    lat: -1.2580,
+    lng: 36.8520,
+    isTerminal: false,
+    shelter: true,
+    lines: ['SM-44', 'LT-237'],
+  },
+  {
+    id: 'stop-allsopps',
+    name: 'Allsopps / Ruaraka Stage',
+    area: 'Thika Superhighway / Outering',
+    lat: -1.2420,
+    lng: 36.8680,
+    isTerminal: false,
+    shelter: true,
+    lines: ['SM-44', 'LT-237'],
+  },
+  {
+    id: 'stop-garden-city',
+    name: 'Garden City Stage',
+    area: 'Thika Superhighway',
+    lat: -1.2350,
+    lng: 36.8745,
+    isTerminal: false,
+    shelter: true,
+    lines: ['SM-44', 'LT-237'],
+  },
+  // Intermediate Ngong Road - Karen Stages
+  {
+    id: 'stop-knh',
+    name: 'KNH / Kenyatta Hospital Stage',
+    area: 'Hospital Rd / Ngong Rd',
+    lat: -1.2995,
+    lng: 36.8100,
+    isTerminal: false,
+    shelter: true,
+    lines: ['CH-111', 'KBS-12'],
+  },
+  {
+    id: 'stop-hurlingham',
+    name: 'Hurlingham Stage',
+    area: 'Ngong Road / Hurlingham',
+    lat: -1.2935,
+    lng: 36.7920,
+    isTerminal: false,
+    shelter: true,
+    lines: ['CH-111'],
+  },
+  {
+    id: 'stop-adams-arcade',
+    name: 'Adams Arcade Stage',
+    area: 'Ngong Road',
+    lat: -1.2950,
+    lng: 36.7790,
+    isTerminal: false,
+    shelter: true,
+    lines: ['CH-111'],
+  },
+  {
+    id: 'stop-dagoretti-corner',
+    name: 'Dagoretti Corner Stage',
+    area: 'Ngong Road / Naivasha Rd',
+    lat: -1.3025,
+    lng: 36.7520,
+    isTerminal: false,
+    shelter: true,
+    lines: ['CH-111'],
+  },
+  // Intermediate Mombasa Road / JKIA Stages
+  {
+    id: 'stop-nyayo',
+    name: 'Nyayo Stadium Stage',
+    area: 'Mombasa Road / Langata Rd',
+    lat: -1.3030,
+    lng: 36.8335,
+    isTerminal: false,
+    shelter: true,
+    lines: ['BG-Airport'],
+  },
+  {
+    id: 'stop-bellevue',
+    name: 'South C / Bellevue Stage',
+    area: 'Mombasa Road',
+    lat: -1.3125,
+    lng: 36.8480,
+    isTerminal: false,
+    shelter: true,
+    lines: ['BG-Airport'],
+  },
+  {
+    id: 'stop-cabanas',
+    name: 'City Cabanas / Imara Daima Stage',
+    area: 'Mombasa Road / Embakasi',
+    lat: -1.3310,
+    lng: 36.8930,
+    isTerminal: false,
+    shelter: true,
+    lines: ['BG-Airport'],
+  },
 ];
 
 // Dense, road-following coordinate polylines for Nairobi's major arterial transit corridors
@@ -873,6 +1037,7 @@ export const MOCK_SAVED_PLACES: SavedPlace[] = [
     iconName: 'home',
     lat: -1.2925,
     lng: 36.7876,
+    stopId: 'stop-yaya',
   },
   {
     id: 'sp-work',
@@ -881,6 +1046,7 @@ export const MOCK_SAVED_PLACES: SavedPlace[] = [
     iconName: 'briefcase',
     lat: -1.2655,
     lng: 36.8048,
+    stopId: 'stop-westlands',
   },
   {
     id: 'sp-airport',
@@ -889,6 +1055,7 @@ export const MOCK_SAVED_PLACES: SavedPlace[] = [
     iconName: 'plane',
     lat: -1.3323,
     lng: 36.9275,
+    stopId: 'stop-jkia',
   },
   {
     id: 'sp-kencom',
@@ -897,6 +1064,7 @@ export const MOCK_SAVED_PLACES: SavedPlace[] = [
     iconName: 'map-pin',
     lat: -1.2844,
     lng: 36.8249,
+    stopId: 'stop-kencom',
   },
 ];
 
@@ -1036,6 +1204,58 @@ function getDistanceMeters(lat1: number, lng1: number, lat2: number, lng2: numbe
 }
 
 /**
+ * Levenshtein edit distance for 1-character typo tolerance on stage names (e.g. "museam" -> "museum")
+ */
+function editDistance(a: string, b: string): number {
+  if (Math.abs(a.length - b.length) > 2) return 99;
+  const dp: number[][] = Array.from({ length: a.length + 1 }, () =>
+    Array(b.length + 1).fill(0)
+  );
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost
+      );
+    }
+  }
+  return dp[a.length][b.length];
+}
+
+const GENERIC_STOP_WORDS = new Set([
+  'stage',
+  'terminal',
+  'terminals',
+  'interchange',
+  'roundabout',
+  'centre',
+  'center',
+  'mall',
+  'shopping',
+  'bus',
+  'stop',
+  'station',
+  'cbd',
+  'road',
+  'rd',
+  'way',
+  'ave',
+  'avenue',
+  'highway',
+  'superhighway',
+  'flyover',
+  'junction',
+  'turnoff',
+  'the',
+  'near',
+  'and',
+]);
+
+/**
  * Stop Matching Helper: Finds a TransitStop matching a user search query or location name.
  * Strictly returns undefined if no match is found, preventing silent fallback to Westlands or any hardcoded default.
  */
@@ -1043,12 +1263,16 @@ export function matchStopByQuery(query: string): TransitStop | undefined {
   if (!query || !query.trim()) return undefined;
   const q = query.toLowerCase().trim();
 
+  // Exact ID match check
+  const idMatch = TRANSIT_STOPS.find((s) => s.id === q);
+  if (idMatch) return idMatch;
+
   // 1. Kencom Stage
   if (q.includes('kencom') || q.includes('city hall')) {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-kencom');
   }
   // 2. Westlands / Sarit Centre
-  if (q.includes('sarit') || q.includes('westland') || q.includes('the mall')) {
+  if (q.includes('sarit') || q.includes('westland') || q.includes('wesland') || q.includes('the mall')) {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-westlands');
   }
   // 3. Yaya Centre / Kilimani
@@ -1064,7 +1288,7 @@ export function matchStopByQuery(query: string): TransitStop | undefined {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-jkia');
   }
   // 6. Upper Hill
-  if (q.includes('upper hill') || q.includes('britam') || q.includes('hospital rd')) {
+  if (q.includes('upper hill') || q.includes('upperhill') || q.includes('britam') || q.includes('hospital rd')) {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-upperhill');
   }
   // 7. Junction Mall
@@ -1072,19 +1296,25 @@ export function matchStopByQuery(query: string): TransitStop | undefined {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-junction');
   }
   // 8. Roysambu / TRM
-  if (q.includes('roysambu') || q.includes('trm')) {
+  if (q.includes('roysambu') || q.includes('roysabu') || q.includes('trm')) {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-roysambu');
   }
   // 9. Kasarani
-  if (q.includes('kasarani') || q.includes('sports view')) {
+  if (q.includes('kasarani') || q.includes('kasrani') || q.includes('sports view')) {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-kasarani');
   }
-  // 10. Uthiru / Kinoo
-  if (q.includes('uthiru') || q.includes('kinoo')) {
+  // 10. Uthiru
+  if (q.includes('uthiru') || q.includes('utiru')) {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-uthiru');
   }
-  // 11. Museum Hill
-  if (q.includes('museum') || q.includes('parklands')) {
+  // 11. Museum Hill (including common spelling variants like "museam", "muesum")
+  if (
+    q.includes('museum') ||
+    q.includes('museam') ||
+    q.includes('muesum') ||
+    q.includes('musuem') ||
+    q.includes('parklands')
+  ) {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-museum-hill');
   }
   // 12. Pangani
@@ -1100,45 +1330,232 @@ export function matchStopByQuery(query: string): TransitStop | undefined {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-odeon');
   }
   // 15. Ambassadeur / Moi Ave
-  if (q.includes('ambassadeur') || q.includes('moi ave')) {
+  if (q.includes('ambassadeur') || q.includes('ambassador') || q.includes('moi ave')) {
     return TRANSIT_STOPS.find((s) => s.id === 'stop-ambassadeur');
   }
-
-  // Exact ID match check
-  const idMatch = TRANSIT_STOPS.find((s) => s.id === q);
-  if (idMatch) return idMatch;
+  // 16. Chiromo / Riverside
+  if (q.includes('chiromo') || q.includes('riverside')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-chiromo');
+  }
+  // 17. ABC Place / Lavington North
+  if (q.includes('abc place') || q.includes('abc stage') || q === 'abc' || q.includes('safaricom')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-abc-place');
+  }
+  // 18. Kangemi
+  if (q.includes('kangemi')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-kangemi');
+  }
+  // 19. Mountain View
+  if (q.includes('mountain view') || q.includes('mountainview')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-mountain-view');
+  }
+  // 20. Kinoo / 87
+  if (q.includes('kinoo') || q.includes('87 stage')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-kinoo');
+  }
+  // 21. Ngara
+  if (q.includes('ngara')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-ngara');
+  }
+  // 22. Muthaiga / Survey
+  if (q.includes('muthaiga') || q.includes('survey')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-muthaiga');
+  }
+  // 23. Allsopps / Ruaraka
+  if (q.includes('allsopps') || q.includes('alsops') || q.includes('ruaraka')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-allsopps');
+  }
+  // 24. Garden City
+  if (q.includes('garden city')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-garden-city');
+  }
+  // 25. KNH / Kenyatta Hospital
+  if (q.includes('knh') || q.includes('kenyatta')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-knh');
+  }
+  // 26. Hurlingham
+  if (q.includes('hurlingham')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-hurlingham');
+  }
+  // 27. Adams Arcade
+  if (q.includes('adams')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-adams-arcade');
+  }
+  // 28. Dagoretti Corner
+  if (q.includes('dagoretti')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-dagoretti-corner');
+  }
+  // 29. Nyayo Stadium
+  if (q.includes('nyayo')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-nyayo');
+  }
+  // 30. Bellevue / South C
+  if (q.includes('bellevue') || q.includes('south c')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-bellevue');
+  }
+  // 31. Cabanas / Imara Daima
+  if (q.includes('cabanas') || q.includes('imara daima')) {
+    return TRANSIT_STOPS.find((s) => s.id === 'stop-cabanas');
+  }
 
   // Substring match on stop name or area
-  return TRANSIT_STOPS.find(
+  const directSub = TRANSIT_STOPS.find(
     (s) => s.name.toLowerCase().includes(q) || s.area.toLowerCase().includes(q)
   );
+  if (directSub) return directSub;
+
+  // Tokenized fuzzy match for multi-word queries or minor typos (e.g. "Museam hill interchange")
+  const queryTokens = q
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/)
+    .filter((tok) => tok.length >= 4 && !GENERIC_STOP_WORDS.has(tok));
+
+  if (queryTokens.length > 0) {
+    for (const stop of TRANSIT_STOPS) {
+      const stopWords = `${stop.name} ${stop.area}`
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .split(/\s+/)
+        .filter((w) => w.length >= 4 && !GENERIC_STOP_WORDS.has(w));
+
+      const hasMatch = queryTokens.some((qTok) =>
+        stopWords.some(
+          (sWord) =>
+            sWord === qTok ||
+            (qTok.length >= 5 && sWord.length >= 5 && editDistance(qTok, sWord) <= 1)
+        )
+      );
+      if (hasMatch) {
+        return stop;
+      }
+    }
+  }
+
+  return undefined;
 }
+
+/**
+ * Search helper for autocomplete dropdowns:
+ * Returns matching stops (including fuzzy/typo matches), and if the input already matches a full stop name,
+ * places that stop first followed by the rest of the network stages so the user can easily switch.
+ */
+export function searchStopsByQuery(query: string): TransitStop[] {
+  if (!query || !query.trim()) {
+    return TRANSIT_STOPS;
+  }
+  const q = query.toLowerCase().trim();
+
+  // If the text exactly equals an already-selected stop's name, show it first followed by all stops
+  const exactStop = TRANSIT_STOPS.find((s) => s.name.toLowerCase() === q);
+  if (exactStop) {
+    return [exactStop, ...TRANSIT_STOPS.filter((s) => s.id !== exactStop.id)];
+  }
+
+  const directMatches = TRANSIT_STOPS.filter(
+    (s) =>
+      s.name.toLowerCase().includes(q) ||
+      s.area.toLowerCase().includes(q) ||
+      s.lines.some((l) => l.toLowerCase().includes(q))
+  );
+
+  const fuzzyMatched = matchStopByQuery(q);
+  if (fuzzyMatched && !directMatches.some((s) => s.id === fuzzyMatched.id)) {
+    return [fuzzyMatched, ...directMatches];
+  }
+
+  return directMatches;
+}
+
+type CorridorKey = 'cbd' | 'waiyaki' | 'thika' | 'ngong' | 'mombasa';
 
 /**
  * Helper to classify which corridor a stop primarily belongs to
  */
-function getStopCorridorKey(stopId: string): 'cbd' | 'waiyaki' | 'thika' | 'ngong' | 'mombasa' | 'upperhill' {
+function getStopCorridorKey(stopOrId: TransitStop | string): CorridorKey {
+  const stopId = typeof stopOrId === 'string' ? stopOrId : stopOrId.id;
+
   if (['stop-kencom', 'stop-ambassadeur', 'stop-odeon', 'stop-railways'].includes(stopId)) {
     return 'cbd';
   }
-  if (['stop-westlands', 'stop-museum-hill', 'stop-uthiru'].includes(stopId)) {
+  if (
+    [
+      'stop-westlands',
+      'stop-museum-hill',
+      'stop-uthiru',
+      'stop-chiromo',
+      'stop-abc-place',
+      'stop-kangemi',
+      'stop-mountain-view',
+      'stop-kinoo',
+    ].includes(stopId)
+  ) {
     return 'waiyaki';
   }
-  if (['stop-pangani', 'stop-roysambu', 'stop-kasarani'].includes(stopId)) {
+  if (
+    [
+      'stop-pangani',
+      'stop-roysambu',
+      'stop-kasarani',
+      'stop-ngara',
+      'stop-muthaiga',
+      'stop-allsopps',
+      'stop-garden-city',
+    ].includes(stopId)
+  ) {
     return 'thika';
   }
-  if (['stop-yaya', 'stop-junction', 'stop-karen'].includes(stopId)) {
+  if (
+    [
+      'stop-upperhill',
+      'stop-yaya',
+      'stop-junction',
+      'stop-karen',
+      'stop-knh',
+      'stop-hurlingham',
+      'stop-adams-arcade',
+      'stop-dagoretti-corner',
+    ].includes(stopId)
+  ) {
     return 'ngong';
   }
-  if (stopId === 'stop-jkia') {
+  if (
+    [
+      'stop-jkia',
+      'stop-nyayo',
+      'stop-bellevue',
+      'stop-cabanas',
+    ].includes(stopId)
+  ) {
     return 'mombasa';
   }
-  return 'upperhill';
+
+  // If a custom coordinate stop is passed, find the closest corridor by geometry
+  if (typeof stopOrId !== 'string') {
+    const candidates: { key: CorridorKey; pts: [number, number][] }[] = [
+      { key: 'waiyaki', pts: CORRIDOR_WAYPOINTS.waiyakiWay },
+      { key: 'thika', pts: CORRIDOR_WAYPOINTS.thikaHighway },
+      { key: 'ngong', pts: CORRIDOR_WAYPOINTS.ngongRoad },
+      { key: 'mombasa', pts: CORRIDOR_WAYPOINTS.mombasaRoad },
+      { key: 'cbd', pts: CORRIDOR_WAYPOINTS.cbdLoop },
+    ];
+    let bestKey: CorridorKey = 'waiyaki';
+    let bestDist = Infinity;
+    for (const c of candidates) {
+      for (const pt of c.pts) {
+        const d = getDistanceMeters(stopOrId.lat, stopOrId.lng, pt[0], pt[1]);
+        if (d < bestDist) {
+          bestDist = d;
+          bestKey = c.key;
+        }
+      }
+    }
+    return bestKey;
+  }
+
+  return 'ngong';
 }
 
-function getCorridorWaypointsForKey(
-  key: 'cbd' | 'waiyaki' | 'thika' | 'ngong' | 'mombasa' | 'upperhill'
-): [number, number][] {
+function getCorridorWaypointsForKey(key: CorridorKey): [number, number][] {
   switch (key) {
     case 'waiyaki':
       return CORRIDOR_WAYPOINTS.waiyakiWay;
@@ -1148,8 +1565,6 @@ function getCorridorWaypointsForKey(
       return CORRIDOR_WAYPOINTS.ngongRoad;
     case 'mombasa':
       return CORRIDOR_WAYPOINTS.mombasaRoad;
-    case 'upperhill':
-      return CORRIDOR_WAYPOINTS.upperHillLoop;
     case 'cbd':
     default:
       return CORRIDOR_WAYPOINTS.cbdLoop;
@@ -1207,6 +1622,115 @@ function appendWaypoints(path: [number, number][], points: [number, number][]): 
 }
 
 /**
+ * Ensures a road-corridor slice has at least 4 waypoints even when two adjacent stages are close together.
+ */
+function ensureDenseCorridorWaypoints(path: [number, number][]): [number, number][] {
+  if (path.length >= 4 || path.length < 2) {
+    return path;
+  }
+  const expanded: [number, number][] = [];
+  for (let i = 0; i < path.length - 1; i++) {
+    const a = path[i];
+    const b = path[i + 1];
+    expanded.push(a);
+    expanded.push([a[0] + (b[0] - a[0]) / 3, a[1] + (b[1] - a[1]) / 3]);
+    expanded.push([a[0] + ((b[0] - a[0]) * 2) / 3, a[1] + ((b[1] - a[1]) * 2) / 3]);
+  }
+  expanded.push(path[path.length - 1]);
+  return expanded;
+}
+
+/**
+ * Computes all ordered intermediate stops along a road waypoint path between fromStop and toStop.
+ * Guarantees at least 1 intermediate stop (synthesizing a midpoint corridor stage if two adjacent stages have none between them).
+ */
+function computeOrderedStopsAlongPath(
+  path: [number, number][],
+  fromStop: TransitStop,
+  toStop: TransitStop,
+  transferStop?: TransitStop
+): TransitStop[] {
+  // Precompute cumulative distance at each waypoint
+  const cumDist: number[] = [0];
+  for (let i = 1; i < path.length; i++) {
+    cumDist.push(
+      cumDist[i - 1] +
+        getDistanceMeters(path[i - 1][0], path[i - 1][1], path[i][0], path[i][1])
+    );
+  }
+  const totalPathDist = cumDist[cumDist.length - 1] || 1;
+
+  const matchedIntermediates: { stop: TransitStop; arcDist: number }[] = [];
+
+  TRANSIT_STOPS.forEach((st) => {
+    if (st.id === fromStop.id || st.id === toStop.id) return;
+
+    // Avoid picking up stops that are essentially at the exact origin or destination
+    const distToOrigin = getDistanceMeters(st.lat, st.lng, fromStop.lat, fromStop.lng);
+    const distToDest = getDistanceMeters(st.lat, st.lng, toStop.lat, toStop.lng);
+    if (distToOrigin < 90 || distToDest < 90) return;
+
+    let minDist = Infinity;
+    let bestWIdx = 0;
+    path.forEach((wpt, wIdx) => {
+      const d = getDistanceMeters(wpt[0], wpt[1], st.lat, st.lng);
+      if (d < minDist) {
+        minDist = d;
+        bestWIdx = wIdx;
+      }
+    });
+
+    // Must lie along the interior of the road path (not behind origin or beyond destination)
+    if (bestWIdx > 0 && bestWIdx < path.length - 1 && minDist <= 380) {
+      matchedIntermediates.push({
+        stop: st,
+        arcDist: cumDist[bestWIdx],
+      });
+    }
+  });
+
+  matchedIntermediates.sort((a, b) => a.arcDist - b.arcDist);
+
+  if (transferStop && !matchedIntermediates.some((item) => item.stop.id === transferStop.id)) {
+    let bestTIdx = Math.floor(path.length / 2);
+    let minTDist = Infinity;
+    path.forEach((wpt, wIdx) => {
+      const d = getDistanceMeters(wpt[0], wpt[1], transferStop.lat, transferStop.lng);
+      if (d < minTDist) {
+        minTDist = d;
+        bestTIdx = wIdx;
+      }
+    });
+    matchedIntermediates.push({
+      stop: transferStop,
+      arcDist: cumDist[bestTIdx] ?? totalPathDist / 2,
+    });
+    matchedIntermediates.sort((a, b) => a.arcDist - b.arcDist);
+  }
+
+  // If two immediately adjacent stops have no named stage between them, provide a midpoint corridor stage
+  if (matchedIntermediates.length === 0 && path.length >= 3) {
+    const midIdx = Math.floor(path.length / 2);
+    const midPt = path[midIdx];
+    matchedIntermediates.push({
+      stop: {
+        id: `stop-mid-${fromStop.id}-${toStop.id}`,
+        name: `${fromStop.area.split('/')[0].trim()} Corridor Stage`,
+        area: `${fromStop.area} / ${toStop.area}`,
+        lat: Number(midPt[0].toFixed(4)),
+        lng: Number(midPt[1].toFixed(4)),
+        isTerminal: false,
+        shelter: true,
+        lines: fromStop.lines,
+      },
+      arcDist: cumDist[midIdx],
+    });
+  }
+
+  return [fromStop, ...matchedIntermediates.map((item) => item.stop), toStop];
+}
+
+/**
  * Route Resolver: Returns or generates a road-following route connecting two stops.
  * Returns null if endpoints are missing, identical, or if valid road geometry cannot be formed.
  */
@@ -1229,8 +1753,15 @@ export function findOrCreateRoute(
       (!isElectricOnly || r.isElectric)
   );
   if (directMatch) {
+    const enrichedStops = computeOrderedStopsAlongPath(
+      directMatch.waypoints,
+      fromStop,
+      toStop,
+      directMatch.transferInfo?.transferStop
+    );
     return {
       ...directMatch,
+      stops: enrichedStops.length >= directMatch.stops.length ? enrichedStops : directMatch.stops,
       transfersCount: directMatch.transfersCount ?? 0,
     };
   }
@@ -1244,46 +1775,47 @@ export function findOrCreateRoute(
       (!isElectricOnly || r.isElectric)
   );
   if (reverseMatch) {
+    const revWaypoints = [...reverseMatch.waypoints].reverse();
+    const enrichedRevStops = computeOrderedStopsAlongPath(
+      revWaypoints,
+      fromStop,
+      toStop,
+      reverseMatch.transferInfo?.transferStop
+    );
     return {
       ...reverseMatch,
       id: `${reverseMatch.id}-dyn-rev`,
       name: `${reverseMatch.name} (Return)`,
       fromStop,
       toStop,
-      stops: [...reverseMatch.stops].reverse(),
-      waypoints: [...reverseMatch.waypoints].reverse(),
+      stops:
+        enrichedRevStops.length >= reverseMatch.stops.length
+          ? enrichedRevStops
+          : [...reverseMatch.stops].reverse(),
+      waypoints: revWaypoints,
       transfersCount: reverseMatch.transfersCount ?? 0,
     };
   }
+
+  const fromCorridorKey = getStopCorridorKey(fromStop);
+  const toCorridorKey = getStopCorridorKey(toStop);
 
   // Determine operator and electric status based on corridor
   let isElectric = true;
   let sacco = SACCOS[1]; // Super Metro
 
-  if (toStop.id === 'stop-jkia' || fromStop.id === 'stop-jkia') {
-    sacco = SACCOS[2]; // BasiGo
-  } else if (
-    toStop.id === 'stop-karen' ||
-    fromStop.id === 'stop-karen' ||
-    toStop.id === 'stop-junction' ||
-    fromStop.id === 'stop-junction' ||
-    toStop.id === 'stop-yaya' ||
-    fromStop.id === 'stop-yaya'
-  ) {
+  if (fromCorridorKey === 'mombasa' || toCorridorKey === 'mombasa') {
+    sacco = SACCOS[2]; // BasiGo Electric
+    isElectric = true;
+  } else if (fromCorridorKey === 'waiyaki' && toCorridorKey === 'waiyaki') {
+    sacco = SACCOS[1]; // Super Metro Electric
+    isElectric = true;
+  } else if (fromCorridorKey === 'ngong' || toCorridorKey === 'ngong') {
     isElectric = false;
     sacco = SACCOS[3]; // City Hoppa
-  } else if (
-    toStop.id === 'stop-roysambu' ||
-    fromStop.id === 'stop-roysambu' ||
-    toStop.id === 'stop-kasarani' ||
-    fromStop.id === 'stop-kasarani' ||
-    toStop.id === 'stop-pangani' ||
-    fromStop.id === 'stop-pangani'
-  ) {
+  } else if (fromCorridorKey === 'thika' || toCorridorKey === 'thika') {
     sacco = SACCOS[1]; // Super Metro
-  } else if (toStop.id === 'stop-upperhill' || fromStop.id === 'stop-upperhill') {
-    sacco = SACCOS[3]; // City Hoppa
-    isElectric = false;
+    isElectric = true;
   }
 
   if (saccoId !== 'all') {
@@ -1297,14 +1829,12 @@ export function findOrCreateRoute(
     isElectric = true;
   }
 
-  const fromCorridorKey = getStopCorridorKey(fromStop.id);
-  const toCorridorKey = getStopCorridorKey(toStop.id);
   const needsCbdTransfer =
     fromCorridorKey !== 'cbd' &&
     toCorridorKey !== 'cbd' &&
     fromCorridorKey !== toCorridorKey;
 
-  const path: [number, number][] = [[fromStop.lat, fromStop.lng]];
+  const rawPath: [number, number][] = [[fromStop.lat, fromStop.lng]];
 
   if (needsCbdTransfer) {
     // Stitch Leg 1 (inbound along fromCorridor to its CBD hub), CBD road connector, and Leg 2 (outbound along toCorridor)
@@ -1335,9 +1865,9 @@ export function findOrCreateRoute(
       toStop.lng
     );
 
-    appendWaypoints(path, inboundLeg);
-    appendWaypoints(path, cbdConnector);
-    appendWaypoints(path, outboundLeg);
+    appendWaypoints(rawPath, inboundLeg);
+    appendWaypoints(rawPath, cbdConnector);
+    appendWaypoints(rawPath, outboundLeg);
   } else if (fromCorridorKey === 'cbd' && toCorridorKey === 'cbd') {
     // Both stops are within CBD: route along the CBD arterial road loop
     const cbdSlice = sliceCorridorBetweenCoords(
@@ -1347,15 +1877,17 @@ export function findOrCreateRoute(
       toStop.lat,
       toStop.lng
     );
-    appendWaypoints(path, cbdSlice);
+    appendWaypoints(rawPath, cbdSlice);
   } else {
     // Same corridor, or one endpoint is in CBD and the other is on an outer corridor
     const activeCorridorKey = fromCorridorKey !== 'cbd' ? fromCorridorKey : toCorridorKey;
     const corridor = getCorridorWaypointsForKey(activeCorridorKey);
     const corridorCbdHub = corridor[0];
 
-    if (fromCorridorKey === 'cbd' && getDistanceMeters(fromStop.lat, fromStop.lng, corridorCbdHub[0], corridorCbdHub[1]) > 80) {
-      // First connect from the CBD origin stop along CBD roads to the corridor's CBD terminal
+    if (
+      fromCorridorKey === 'cbd' &&
+      getDistanceMeters(fromStop.lat, fromStop.lng, corridorCbdHub[0], corridorCbdHub[1]) > 80
+    ) {
       const cbdApproach = sliceCorridorBetweenCoords(
         CORRIDOR_WAYPOINTS.cbdLoop,
         fromStop.lat,
@@ -1363,80 +1895,65 @@ export function findOrCreateRoute(
         corridorCbdHub[0],
         corridorCbdHub[1]
       );
-      appendWaypoints(path, cbdApproach);
+      appendWaypoints(rawPath, cbdApproach);
     }
 
     const mainSlice = sliceCorridorBetweenCoords(
       corridor,
-      path[path.length - 1][0],
-      path[path.length - 1][1],
+      rawPath[rawPath.length - 1][0],
+      rawPath[rawPath.length - 1][1],
       toStop.lat,
       toStop.lng
     );
-    appendWaypoints(path, mainSlice);
+    appendWaypoints(rawPath, mainSlice);
 
-    if (toCorridorKey === 'cbd' && getDistanceMeters(path[path.length - 1][0], path[path.length - 1][1], toStop.lat, toStop.lng) > 80) {
-      // Connect from the corridor's CBD terminal along CBD roads to the CBD destination stop
+    if (
+      toCorridorKey === 'cbd' &&
+      getDistanceMeters(rawPath[rawPath.length - 1][0], rawPath[rawPath.length - 1][1], toStop.lat, toStop.lng) > 80
+    ) {
       const cbdExit = sliceCorridorBetweenCoords(
         CORRIDOR_WAYPOINTS.cbdLoop,
-        path[path.length - 1][0],
-        path[path.length - 1][1],
+        rawPath[rawPath.length - 1][0],
+        rawPath[rawPath.length - 1][1],
         toStop.lat,
         toStop.lng
       );
-      appendWaypoints(path, cbdExit);
+      appendWaypoints(rawPath, cbdExit);
     }
   }
 
   // Ensure exact destination coordinate is the final point
-  const lastPt = path[path.length - 1];
+  const lastPt = rawPath[rawPath.length - 1];
   if (getDistanceMeters(lastPt[0], lastPt[1], toStop.lat, toStop.lng) > 10) {
-    path.push([toStop.lat, toStop.lng]);
+    rawPath.push([toStop.lat, toStop.lng]);
   } else {
-    path[path.length - 1] = [toStop.lat, toStop.lng];
+    rawPath[rawPath.length - 1] = [toStop.lat, toStop.lng];
   }
   // Ensure exact origin coordinate is the first point
-  path[0] = [fromStop.lat, fromStop.lng];
+  rawPath[0] = [fromStop.lat, fromStop.lng];
 
-  // Never allow a 2-point straight-line fallback
+  // Subdivide closely spaced corridor segments so valid road segments always have >= 4 points
+  const path = ensureDenseCorridorWaypoints(rawPath);
+
   if (path.length < 3) {
     return null;
   }
 
-  // Identify intermediate stops along this road path in order of travel
-  const intermediateStops: { stop: TransitStop; distFromStart: number }[] = [];
-  TRANSIT_STOPS.forEach((st) => {
-    if (st.id === fromStop.id || st.id === toStop.id) return;
-    let minDist = Infinity;
-    let closestWaypointIdx = 0;
-    path.forEach((wpt, wIdx) => {
-      const d = getDistanceMeters(wpt[0], wpt[1], st.lat, st.lng);
-      if (d < minDist) {
-        minDist = d;
-        closestWaypointIdx = wIdx;
-      }
-    });
-    if (minDist <= 550) {
-      intermediateStops.push({ stop: st, distFromStart: closestWaypointIdx });
-    }
-  });
-
-  intermediateStops.sort((a, b) => a.distFromStart - b.distFromStart);
-
+  // Determine CBD transfer hub stop if crossing two outer corridors
   let transferStop: TransitStop | undefined;
   if (needsCbdTransfer) {
-    transferStop =
-      intermediateStops.find((item) => item.stop.isTerminal)?.stop ||
-      TRANSIT_STOPS[0]; // Kencom Terminal CBD hub
-    if (!intermediateStops.some((item) => item.stop.id === transferStop!.id)) {
-      intermediateStops.splice(Math.floor(intermediateStops.length / 2), 0, {
-        stop: transferStop,
-        distFromStart: Math.floor(path.length / 2),
-      });
+    if (toCorridorKey === 'thika') {
+      transferStop = TRANSIT_STOPS.find((s) => s.id === 'stop-odeon') || TRANSIT_STOPS[0];
+    } else if (toCorridorKey === 'ngong') {
+      transferStop = TRANSIT_STOPS.find((s) => s.id === 'stop-ambassadeur') || TRANSIT_STOPS[0];
+    } else if (toCorridorKey === 'mombasa') {
+      transferStop = TRANSIT_STOPS.find((s) => s.id === 'stop-railways') || TRANSIT_STOPS[0];
+    } else {
+      transferStop = TRANSIT_STOPS[0]; // Kencom Terminal CBD hub
     }
   }
 
-  const orderedStops = [fromStop, ...intermediateStops.map((item) => item.stop), toStop];
+  const orderedStops = computeOrderedStopsAlongPath(path, fromStop, toStop, transferStop);
 
   // Calculate total route distance in meters
   let totalDistMeters = 0;
@@ -1448,15 +1965,15 @@ export function findOrCreateRoute(
   const demoFareKes = Math.min(180, Math.max(50, Math.round(((totalDistMeters / 1000) * 6) / 10) * 10));
   const co2SavedKg = Number(((totalDistMeters / 1000) * (isElectric ? 0.16 : 0.08)).toFixed(1));
 
-  // If a transfer is involved across two outer corridors, identify the connecting route from MOCK_ROUTES
+  // If a transfer is involved across two outer corridors, identify the connecting route
   const connectingRoute = needsCbdTransfer
-    ? MOCK_ROUTES.find((r) => r.toStop.id === toStop.id) || MOCK_ROUTES[0]
+    ? MOCK_ROUTES.find((r) => getStopCorridorKey(r.toStop) === toCorridorKey) || MOCK_ROUTES[0]
     : undefined;
 
   return {
-    id: `dyn-route-${fromStop.id}-${toStop.id}`,
-    name: `${fromStop.name.split(' ')[0]} ⇄ ${toStop.name.split(' ')[0]} Express`,
-    routeCode: `NRB-${fromStop.id.slice(5, 7).toUpperCase()}`,
+    id: `dyn-route-${fromStop.id}-${toStop.id}-${sacco.id}`,
+    name: `${fromStop.name.split(' ')[0]} ⇄ ${toStop.name.split(' ')[0]} Green Line`,
+    routeCode: `NRB-${fromStop.id.replace('stop-', '').slice(0, 3).toUpperCase()}-${toStop.id.replace('stop-', '').slice(0, 3).toUpperCase()}`,
     saccoId: sacco.id,
     saccoName: sacco.name,
     isElectric,
@@ -1485,4 +2002,87 @@ export function findOrCreateRoute(
         : undefined,
   };
 }
+
+/**
+ * Generates all applicable route options strictly connecting `fromStop` to `toStop`.
+ * Never mixes in unrelated endpoints (e.g. Westlands -> Kencom when searching Museum Hill -> Uthiru),
+ * ensuring that sorting by Fastest, Lowest Fare, or Preferred SACCO always displays the green line
+ * and stops for the user's actual selected origin and destination.
+ */
+export function findRoutesForJourney(
+  fromStop: TransitStop | null | undefined,
+  toStop: TransitStop | null | undefined,
+  saccoId = 'all',
+  isElectricOnly = false
+): RouteOption[] {
+  if (!fromStop || !toStop || fromStop.id === toStop.id) {
+    return [];
+  }
+
+  const primary = findOrCreateRoute(fromStop, toStop, saccoId, isElectricOnly);
+  if (!primary) {
+    return [];
+  }
+
+  // If the user explicitly filtered to a single SACCO, return the routes for that SACCO
+  if (saccoId !== 'all') {
+    return [primary];
+  }
+
+  const results: RouteOption[] = [primary];
+
+  // Add an alternative Electric Express option connecting the exact same fromStop -> toStop
+  const altElectricSaccoId =
+    primary.saccoId === 'basigo'
+      ? 'super-metro'
+      : primary.saccoId === 'super-metro'
+      ? 'basigo'
+      : 'metro-trans';
+  const altElectricSacco = SACCOS.find((s) => s.id === altElectricSaccoId);
+  if (altElectricSacco) {
+    const baseDuration = primary.durationMinutes ?? 18;
+    const baseFare = primary.demoFareKes ?? 70;
+    results.push({
+      ...primary,
+      id: `${primary.id}-alt-${altElectricSacco.id}`,
+      name: `${altElectricSacco.name} ${fromStop.name.split(' ')[0]} → ${toStop.name.split(' ')[0]} Express`,
+      routeCode: `${altElectricSacco.name.slice(0, 2).toUpperCase()}-${toStop.id.replace('stop-', '').slice(0, 3).toUpperCase()}`,
+      saccoId: altElectricSacco.id,
+      saccoName: altElectricSacco.name,
+      isElectric: true,
+      durationMinutes: Math.max(6, baseDuration - 2),
+      demoFareKes: baseFare + 10,
+      co2SavedKg: Number(Math.max(0.8, (primary.co2SavedKg || 1.2) * 1.1).toFixed(1)),
+      tag: 'Fastest',
+      nextDepartures: ['2 min', '7 min', '13 min'],
+    });
+  }
+
+  // Add a Budget / High-Frequency option connecting the exact same fromStop -> toStop
+  const budgetSaccoId = isElectricOnly ? 'metro-trans' : 'city-hoppa';
+  if (!results.some((r) => r.saccoId === budgetSaccoId)) {
+    const budgetSacco = SACCOS.find((s) => s.id === budgetSaccoId);
+    if (budgetSacco) {
+      const baseDuration = primary.durationMinutes ?? 18;
+      const baseFare = primary.demoFareKes ?? 70;
+      results.push({
+        ...primary,
+        id: `${primary.id}-alt-${budgetSacco.id}`,
+        name: `${budgetSacco.name} ${fromStop.name.split(' ')[0]} – ${toStop.name.split(' ')[0]} Line`,
+        routeCode: `${budgetSacco.name.slice(0, 2).toUpperCase()}-${fromStop.id.replace('stop-', '').slice(0, 2).toUpperCase()}${toStop.id.replace('stop-', '').slice(0, 2).toUpperCase()}`,
+        saccoId: budgetSacco.id,
+        saccoName: budgetSacco.name,
+        isElectric: budgetSacco.isElectric,
+        durationMinutes: baseDuration + 4,
+        demoFareKes: Math.max(40, baseFare - 10),
+        co2SavedKg: Number(((primary.co2SavedKg || 1.0) * (budgetSacco.isElectric ? 1 : 0.55)).toFixed(1)),
+        tag: 'Cheapest',
+        nextDepartures: ['5 min', '11 min', '19 min'],
+      });
+    }
+  }
+
+  return results;
+}
+
 

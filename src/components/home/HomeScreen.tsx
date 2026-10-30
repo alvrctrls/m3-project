@@ -101,13 +101,25 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
     return list;
   }, [electricFilter, transportPrefs]);
 
-  // Handle Search Submission
+  // Handle Search Submission (supports single destination OR "Origin to Destination" e.g. "Museam hill interchange to Uthiru")
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const query = searchQuery.trim();
     if (!query) {
       onNavigateToActivity();
       return;
+    }
+
+    // Check if the user entered "Origin to Destination" (e.g., "Museam hill interchange to Uthiru")
+    const rangeParts = query.split(/\s+(?:to|->|-)\s+/i);
+    if (rangeParts.length === 2 && rangeParts[0].trim() && rangeParts[1].trim()) {
+      const origStop = matchStopByQuery(rangeParts[0].trim());
+      const destStop = matchStopByQuery(rangeParts[1].trim());
+      if (origStop && destStop) {
+        addRecentSearch(destStop.name, destStop.lat, destStop.lng, destStop.id);
+        onNavigateToActivity(destStop.name, undefined, origStop.name);
+        return;
+      }
     }
 
     // Match query against known Nairobi transit stops to ensure accurate coordinates

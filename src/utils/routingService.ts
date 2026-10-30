@@ -4,7 +4,7 @@
  */
 
 import { TransitStop, RouteOption } from '../types/transit';
-import { findOrCreateRoute } from '../data/mockData';
+import { findOrCreateRoute, findRoutesForJourney } from '../data/mockData';
 
 export interface RouteCacheStats {
   hits: number;
@@ -19,6 +19,7 @@ export interface RouteCacheStats {
  */
 class RoutingService {
   private cache = new Map<string, RouteOption>();
+  private journeyListCache = new Map<string, RouteOption[]>();
   private inFlightRequests = new Map<string, Promise<RouteOption | null>>();
   private stats: RouteCacheStats = {
     hits: 0,
@@ -128,12 +129,40 @@ class RoutingService {
     return route;
   }
 
+  /**
+   * Returns all valid route options strictly connecting `fromStop` to `toStop`.
+   */
+  public getRoutesForJourneySync(
+    fromStop: TransitStop | null | undefined,
+    toStop: TransitStop | null | undefined,
+    saccoId = 'all',
+    isElectricOnly = false
+  ): RouteOption[] {
+    if (!fromStop || !toStop || fromStop.id === toStop.id) {
+      return [];
+    }
+
+    const key = this.getCacheKey(fromStop, toStop, saccoId, isElectricOnly);
+    if (!key) return [];
+
+    if (this.journeyListCache.has(key)) {
+      return this.journeyListCache.get(key)!;
+    }
+
+    const routes = findRoutesForJourney(fromStop, toStop, saccoId, isElectricOnly);
+    if (routes.length > 0) {
+      this.journeyListCache.set(key, routes);
+    }
+    return routes;
+  }
+
   public getStats(): RouteCacheStats {
     return { ...this.stats };
   }
 
   public clearCache(): void {
     this.cache.clear();
+    this.journeyListCache.clear();
     this.inFlightRequests.clear();
     this.stats = {
       hits: 0,

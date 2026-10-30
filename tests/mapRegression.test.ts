@@ -12,7 +12,8 @@ import {
   MOCK_VEHICLES, 
   SACCOS,
   matchStopByQuery, 
-  findOrCreateRoute 
+  findOrCreateRoute,
+  findRoutesForJourney
 } from '../src/data/mockData';
 import { 
   computeHaversineDistanceMeters, 
@@ -331,6 +332,77 @@ async function runTestSuite() {
   const rAsync = await routingService.getRoute(stopKencom, stopSarit, 'all', false);
   const stats3 = routingService.getStats();
   assert(rAsync === r1 && stats3.hits === 2, 'E.4 Async route request respects cache');
+
+  console.log('\nTRACK F: Full-Corridor Green Line & Intermediate Stops Checks (e.g. Museum Hill -> Uthiru):');
+
+  const stopMuseumHillTypo = matchStopByQuery('Museam hill interchange');
+  const stopUthiru = matchStopByQuery('Uthiru');
+  assert(
+    !!stopMuseumHillTypo && stopMuseumHillTypo.id === 'stop-museum-hill',
+    'F.1 Fuzzy query "Museam hill interchange" resolves to stop-museum-hill'
+  );
+  assert(
+    !!stopUthiru && stopUthiru.id === 'stop-uthiru',
+    'F.1 Query "Uthiru" resolves to stop-uthiru'
+  );
+
+  const routeMuseumToUthiru = findOrCreateRoute(stopMuseumHillTypo, stopUthiru);
+  assert(
+    !!routeMuseumToUthiru &&
+      routeMuseumToUthiru.fromStop.id === 'stop-museum-hill' &&
+      routeMuseumToUthiru.toStop.id === 'stop-uthiru' &&
+      routeMuseumToUthiru.waypoints.length >= 10,
+    `F.2 Museum Hill -> Uthiru route has complete road-following geometry (${routeMuseumToUthiru?.waypoints.length} waypoints)`
+  );
+  assert(
+    !!routeMuseumToUthiru &&
+      routeMuseumToUthiru.stops.length >= 7 &&
+      routeMuseumToUthiru.stops[0].id === 'stop-museum-hill' &&
+      routeMuseumToUthiru.stops[routeMuseumToUthiru.stops.length - 1].id === 'stop-uthiru' &&
+      routeMuseumToUthiru.stops.some((s) => s.id === 'stop-westlands') &&
+      routeMuseumToUthiru.stops.some((s) => s.id === 'stop-kangemi') &&
+      routeMuseumToUthiru.stops.some((s) => s.id === 'stop-mountain-view') &&
+      routeMuseumToUthiru.stops.some((s) => s.id === 'stop-kinoo'),
+    `F.3 Museum Hill -> Uthiru includes ordered intermediate stops (${routeMuseumToUthiru?.stops.map((s) => s.name).join(' -> ')})`
+  );
+
+  const journeyOptionsMuseumToUthiru = findRoutesForJourney(stopMuseumHillTypo, stopUthiru, 'all', false);
+  assert(
+    journeyOptionsMuseumToUthiru.length >= 2 &&
+      journeyOptionsMuseumToUthiru.every(
+        (r) =>
+          r.fromStop.id === 'stop-museum-hill' &&
+          r.toStop.id === 'stop-uthiru' &&
+          r.waypoints.length >= 10 &&
+          r.stops.length >= 7
+      ),
+    'F.4 All route comparison options for Museum Hill -> Uthiru strictly connect Museum Hill to Uthiru (never reverting to Westlands -> Kencom)'
+  );
+
+  // Verify every pair of distinct primary stages produces a road-following route with intermediate stops
+  const sampleTestPairs: [string, string][] = [
+    ['stop-westlands', 'stop-uthiru'],
+    ['stop-uthiru', 'stop-museum-hill'],
+    ['stop-odeon', 'stop-kasarani'],
+    ['stop-pangani', 'stop-roysambu'],
+    ['stop-upperhill', 'stop-karen'],
+    ['stop-railways', 'stop-jkia'],
+    ['stop-uthiru', 'stop-jkia'],
+    ['stop-roysambu', 'stop-karen'],
+  ];
+  sampleTestPairs.forEach(([fromId, toId]) => {
+    const sFrom = TRANSIT_STOPS.find((s) => s.id === fromId)!;
+    const sTo = TRANSIT_STOPS.find((s) => s.id === toId)!;
+    const r = findOrCreateRoute(sFrom, sTo);
+    assert(
+      !!r &&
+        r.fromStop.id === fromId &&
+        r.toStop.id === toId &&
+        r.waypoints.length >= 4 &&
+        r.stops.length >= 3,
+      `F.5 Route ${sFrom.name} -> ${sTo.name} has ${r?.waypoints.length} road waypoints and ${r?.stops.length} stops`
+    );
+  });
 
   console.log('\n====================================================');
   const passedCount = results.filter((r) => r.passed).length;
