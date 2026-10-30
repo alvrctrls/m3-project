@@ -190,7 +190,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
               <Zap className="w-4 h-4 fill-white" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold text-emerald-800 block">
+              <span className="text-[11px] uppercase font-bold text-emerald-800 block">
                 CO₂ Offset
               </span>
               <span className="text-base font-extrabold text-emerald-950">
@@ -204,7 +204,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
               <User className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[10px] uppercase font-bold text-slate-500 block">
+              <span className="text-[11px] uppercase font-bold text-slate-500 block">
                 Total Trips
               </span>
               <span className="text-base font-extrabold text-slate-900">
@@ -224,7 +224,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
               m3 Transit Balance
             </span>
           </div>
-          <span className="text-[10px] bg-white/10 px-2 py-0.5 rounded-full font-mono">
+          <span className="text-[11px] bg-white/10 px-2 py-0.5 rounded-full font-mono">
             NFC Active
           </span>
         </div>
@@ -234,7 +234,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
             <div className="text-2xl font-extrabold tracking-tight font-heading">
               KES {profile.m3BalanceKes.toLocaleString()}
             </div>
-            <div className="text-[11px] text-slate-400">
+            <div className="text-xs text-slate-400">
               Auto-topup linked to M-PESA ({profile.phone})
             </div>
           </div>
@@ -269,7 +269,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
               <Sliders className="w-3.5 h-3.5 text-[#00e575]" />
               <span>Prioritize Preferred SACCOs</span>
             </div>
-            <p className="text-[11px] text-slate-500 mt-0.5 leading-snug">
+            <p className="text-xs text-slate-500 mt-0.5 leading-snug">
               Positions your favorite operators first on Home and Activity screens while keeping all routes accessible.
             </p>
           </div>
@@ -291,7 +291,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
         </div>
 
         {/* Quick Selection Actions */}
-        <div className="flex items-center justify-between text-[11px] pt-1 px-0.5">
+        <div className="flex items-center justify-between text-xs pt-1 px-0.5">
           <span className="text-slate-500">
             Select the operators you ride most often:
           </span>
@@ -344,7 +344,7 @@ export const AccountScreen: React.FC<AccountScreenProps> = ({
                         </span>
                       )}
                     </div>
-                    <div className="text-[10px] text-slate-400 font-normal truncate mt-0.5">
+                    <div className="text-[11px] text-slate-500 font-normal truncate mt-0.5">
                       {sacco.corridors.slice(0, 2).join(' • ')}
                     </div>
                   </div>

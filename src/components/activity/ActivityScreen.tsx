@@ -728,12 +728,13 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
           </div>
         )}
 
-        {/* Quick Saved Places Shortcuts */}
-        {savedPlaces.length > 0 && (
-          <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
-            <span className="text-[10px] text-slate-400 uppercase font-bold shrink-0">
-              Saved:
-            </span>
+        {/* Quick Saved Places and Stage Shortcuts */}
+        <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
+          {savedPlaces.length > 0 && (
+            <>
+              <span className="text-[11px] text-slate-500 uppercase font-bold shrink-0">
+                Saved:
+              </span>
             {savedPlaces.map((place) => {
               const Icon =
                 place.iconName === 'home'
@@ -776,12 +777,10 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                 </button>
               );
             })}
-          </div>
-        )}
-
-        {/* Quick Stage Presets */}
-        <div className="mt-2 pt-2 border-t border-slate-100 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
-          <span className="text-[10px] text-slate-400 uppercase font-bold shrink-0">
+              <span className="h-5 border-l border-slate-200 mx-1 shrink-0" aria-hidden="true" />
+            </>
+          )}
+          <span className="text-[11px] text-slate-500 uppercase font-bold shrink-0">
             Stages:
           </span>
           {TRANSIT_STOPS.slice(0, 7).map((stop) => (
@@ -799,7 +798,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
                 setSelectedRouteId(null);
                 setRepeatRouteNotice(null);
               }}
-              className="shrink-0 px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition text-[11px]"
+              className="shrink-0 px-2.5 py-1 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium transition text-xs"
             >
               {stop.name.split(' ')[0]}
             </button>
@@ -861,7 +860,24 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
         </div>
       )}
 
-      {/* 2. SACCO Filter Pills */}
+      {/* 2. Interactive Map (Centered on Nairobi) */}
+      <section className="w-full relative">
+        <NairobiMap
+          vehicles={MOCK_VEHICLES}
+          stops={TRANSIT_STOPS}
+          selectedRoute={activeRoute}
+          selectedVehicle={selectedVehicle}
+          originStop={originStop}
+          destinationStop={destinationStop}
+          onSelectVehicle={(v) => {
+            setSelectedVehicle(v);
+          }}
+          filterSaccoId={selectedSaccoId}
+          isElectricOnly={isElectricOnly}
+        />
+      </section>
+
+      {/* 3. SACCO Filter Pills */}
       <section className="space-y-2">
         <div className="flex items-center justify-between px-1">
           <span className="text-xs font-bold uppercase tracking-wider text-[#6b7280]">
@@ -871,7 +887,7 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
             <button
               type="button"
               onClick={() => handleOpenGuideSection('guide-saccos')}
-              className="text-[11px] px-2.5 py-1 rounded-full bg-white text-[#0b1b3d] border border-slate-200 hover:bg-slate-50 font-semibold flex items-center gap-1 transition"
+              className="text-xs px-2.5 py-1 rounded-full bg-white text-[#0b1b3d] border border-slate-200 hover:bg-slate-50 font-semibold flex items-center gap-1 transition"
             >
               <BookOpen className="w-3 h-3 text-[#006d43]" />
               <span>Commuter Guide</span>
@@ -925,23 +941,6 @@ export const ActivityScreen: React.FC<ActivityScreenProps> = ({
             );
           })}
         </div>
-      </section>
-
-      {/* 3. Interactive Map (Centered on Nairobi) */}
-      <section className="w-full relative">
-        <NairobiMap
-          vehicles={MOCK_VEHICLES}
-          stops={TRANSIT_STOPS}
-          selectedRoute={activeRoute}
-          selectedVehicle={selectedVehicle}
-          originStop={originStop}
-          destinationStop={destinationStop}
-          onSelectVehicle={(v) => {
-            setSelectedVehicle(v);
-          }}
-          filterSaccoId={selectedSaccoId}
-          isElectricOnly={isElectricOnly}
-        />
       </section>
 
       {/* Share / Toast notification */}

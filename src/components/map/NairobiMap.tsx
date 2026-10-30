@@ -79,7 +79,6 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
   const [showStops, setShowStops] = useState<boolean>(true);
   const [mapError, setMapError] = useState<string | null>(null);
   const [routeGeometryMissing, setRouteGeometryMissing] = useState<boolean>(false);
-  const [tileProviderName, setTileProviderName] = useState<string>('MapTiler Streets');
   const [inspectedVehicle, setInspectedVehicle] = useState<Vehicle | null>(selectedVehicle);
 
   // Read MapTiler API Key strictly from environment variable
@@ -127,26 +126,18 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
         maxZoom: 20,
         tileSize: 256,
       });
-      setTileProviderName('MapTiler Streets-v2');
-
       tileLayer.on('tileerror', () => {
         setMapError(
           'MapTiler tiles failed to load. Check that your MapTiler API key has allowed HTTP origins or valid quota.'
         );
       });
     } else {
-      // API Key missing or not yet configured
-      setMapError(
-        'MapTiler API key missing: Set VITE_MAPTILER_API_KEY in .env to load MapTiler tiles. (Fallback tiles displayed)'
-      );
-      // Clean fallback so the user still has an interactive map rather than a broken blank or static screenshot
-      tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      tileLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 20,
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+        subdomains: 'abc',
+        maxZoom: 19,
       });
-      setTileProviderName('Fallback Carto (MapTiler key required)');
     }
 
     tileLayer.addTo(map);
@@ -219,9 +210,7 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
               }
             </div>
           </div>
-          <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/80 backdrop-blur-xs text-[9px] font-medium text-white px-1.5 py-0.5 rounded shadow pointer-events-none">
-            ${vehicle.saccoName.split(' ')[0]}
-          </div>
+          ${isSelected ? `<div class="absolute -bottom-4 left-1/2 -translate-x-1/2 whitespace-nowrap bg-black/80 backdrop-blur-xs text-[10px] font-medium text-white px-1.5 py-0.5 rounded shadow pointer-events-none">${vehicle.saccoName.split(' ')[0]}</div>` : ''}
         </div>
       `;
 
@@ -695,9 +684,6 @@ export const NairobiMap: React.FC<NairobiMapProps> = ({
           </span>
         </div>
 
-        <div className="pointer-events-auto bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] text-slate-500 font-medium border border-slate-200">
-          {tileProviderName}
-        </div>
       </div>
     </div>
   );

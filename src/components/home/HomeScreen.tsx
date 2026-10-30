@@ -208,65 +208,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </div>
       )}
 
-      {/* 1. SACCO Selection at the top */}
-      <section className="space-y-2.5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-[#6b7280]">
-              Partner SACCOs & Fleet
-            </h2>
-          </div>
-          <button
-            onClick={() => setElectricFilter(!electricFilter)}
-            className={`text-xs px-2.5 py-1 rounded-full flex items-center gap-1 font-semibold transition ${
-              electricFilter
-                ? 'bg-[#00e575] text-[#0b1b3d] shadow-xs'
-                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
-            }`}
-          >
-            <Zap className="w-3 h-3 text-emerald-600 fill-emerald-600" />
-            <span>e-Buses Only</span>
-          </button>
-        </div>
-
-        {/* Horizontal scrollable SACCO chips */}
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4">
-          {displaySaccos.map((sacco) => {
-            const isSelected = selectedSaccoId === sacco.id;
-            const isPreferred = sacco.id !== 'all' && transportPrefs.preferredSaccoIds.includes(sacco.id);
-            return (
-              <button
-                key={sacco.id}
-                onClick={() => onSelectSacco(sacco.id)}
-                className={`shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full border transition-all text-xs font-semibold ${
-                  isSelected
-                    ? 'bg-[#0b1b3d] text-white border-[#0b1b3d] shadow-sm'
-                    : isPreferred
-                    ? 'bg-rose-50/50 text-slate-800 border-rose-200 hover:border-rose-300 hover:bg-rose-50'
-                    : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                }`}
-              >
-                {isPreferred && (
-                  <Heart className={`w-3 h-3 shrink-0 ${isSelected ? 'text-[#00e575] fill-[#00e575]' : 'text-rose-500 fill-rose-500'}`} />
-                )}
-                {sacco.isElectric ? (
-                  <span className="w-2 h-2 rounded-full bg-[#00e575] shadow-[0_0_8px_#00e575]" />
-                ) : !isPreferred ? (
-                  <span className="w-2 h-2 rounded-full bg-slate-300" />
-                ) : null}
-                <span>{sacco.name}</span>
-                {sacco.isElectric && (
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isSelected ? 'bg-emerald-500/30 text-emerald-300' : 'bg-emerald-100 text-emerald-800'}`}>
-                    <Zap className="w-3 h-3" aria-hidden="true" />
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 2. Prominent "Where to?" Search Field */}
+      {/* 1. Prominent "Where to?" Search Field */}
       <section className="bg-white rounded-3xl p-5 shadow-sm border border-[#e5e7eb] space-y-4">
         <div className="flex items-center justify-between">
           <span className="text-xl font-bold font-heading text-[#0b1b3d]">
@@ -315,6 +257,61 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               {loc}
             </button>
           ))}
+        </div>
+      </section>
+
+      {/* 2. SACCO Selection */}
+      <section className="space-y-2.5">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-[#6b7280]">
+            Partner SACCOs & Fleet
+          </h2>
+          <button
+            onClick={() => setElectricFilter(!electricFilter)}
+            className={`text-xs px-2.5 py-1 rounded-full flex items-center gap-1 font-semibold transition ${
+              electricFilter
+                ? 'bg-[#00e575] text-[#0b1b3d] shadow-xs'
+                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+            }`}
+          >
+            <Zap className="w-3 h-3 text-emerald-600 fill-emerald-600" />
+            <span>e-Buses Only</span>
+          </button>
+        </div>
+
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 -mx-4 px-4">
+          {displaySaccos.map((sacco) => {
+            const isSelected = selectedSaccoId === sacco.id;
+            const isPreferred = sacco.id !== 'all' && transportPrefs.preferredSaccoIds.includes(sacco.id);
+            return (
+              <button
+                key={sacco.id}
+                onClick={() => onSelectSacco(sacco.id)}
+                className={`shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-full border transition-all text-xs font-semibold ${
+                  isSelected
+                    ? 'bg-[#0b1b3d] text-white border-[#0b1b3d] shadow-sm'
+                    : isPreferred
+                    ? 'bg-rose-50/50 text-slate-800 border-rose-200 hover:border-rose-300 hover:bg-rose-50'
+                    : 'bg-white text-slate-700 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                }`}
+              >
+                {isPreferred && (
+                  <Heart className={`w-3 h-3 shrink-0 ${isSelected ? 'text-[#00e575] fill-[#00e575]' : 'text-rose-500 fill-rose-500'}`} />
+                )}
+                {sacco.isElectric ? (
+                  <span className="w-2 h-2 rounded-full bg-[#00e575] shadow-[0_0_8px_#00e575]" />
+                ) : !isPreferred ? (
+                  <span className="w-2 h-2 rounded-full bg-slate-300" />
+                ) : null}
+                <span>{sacco.name}</span>
+                {sacco.isElectric && (
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${isSelected ? 'bg-emerald-500/30 text-emerald-300' : 'bg-emerald-100 text-emerald-800'}`}>
+                    <Zap className="w-3 h-3" aria-hidden="true" />
+                  </span>
+                )}
+              </button>
+            );
+          })}
         </div>
       </section>
 
